@@ -2,6 +2,13 @@ import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/material.dart';
 
 class ACSTyphoghraphy {
+  static const TextStyle homeHeading = TextStyle(
+    fontSize: 24,
+    fontFamily: 'CrimsonPro-SemiBold',
+    fontWeight: FontWeight.w600,
+    color: ACSColors.text,
+  );
+
   static const TextStyle titleAppbar = TextStyle(
     color: ACSColors.white,
     fontSize: 28,

@@ -66,7 +66,10 @@ class _BookingScreenState extends State<BookingScreen> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
                           child: Text('Đồng ý',
                               style: ACSTyphoghraphy.buttonTitle),
                           style: ElevatedButton.styleFrom(

@@ -1,3 +1,5 @@
+import 'package:acs_1/screens/booking.dart';
+import 'package:acs_1/screens/homepage.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,13 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
       bottomNavigationBar: PandaBar(
         backgroundColor: ACSColors.primary,
         buttonSelectedColor: ACSColors.white,
+        fabIcon:
+            const Icon(CupertinoIcons.add, color: ACSColors.white, size: 30),
+        fabColors: const [
+          ACSColors.primary,
+          ACSColors.primary,
+          ACSColors.primary,
+        ],
         buttonData: [
           PandaBarButtonData(
             id: 'Home',
@@ -44,17 +53,16 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
           ),
         ],
         onChange: (id) {
-          setState(() {
-            page = id;
-          });
+          setState(() => page = id);
         },
-        onFabButtonPressed: () {},
+        onFabButtonPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => BookingScreen())),
       ),
       body: Builder(
         builder: (context) {
           switch (page) {
             case 'Home':
-              return Container(color: Colors.grey.shade900);
+              return const HomeScreen();
             case 'Appointment':
               return Container(color: Colors.blue.shade900);
             case 'Profile':
