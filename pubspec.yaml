@@ -32,6 +32,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   introduction_screen: ^3.0.0
   get: ^4.6.1
+  persistent_bottom_nav_bar: ^4.0.2
+  pandabar: ^0.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
