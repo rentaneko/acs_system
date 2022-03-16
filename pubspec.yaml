@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   introduction_screen: ^3.0.0
+  get: ^4.6.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -87,6 +88,24 @@ flutter:
     - family: Comfortaa-SemiBold
       fonts:
         - asset: assets/fonts/Comfortaa-SemiBold.ttf
+    - family: CrimsonPro-Light
+      fonts:
+        - asset: assets/fonts/CrimsonPro-Light.ttf
+    - family: CrimsonPro-Bold
+      fonts:
+        - asset: assets/fonts/CrimsonPro-Bold.ttf
+    - family: CrimsonPro-ExtraLight
+      fonts:
+        - asset: assets/fonts/CrimsonPro-ExtraLight.ttf
+    - family: CrimsonPro-Medium
+      fonts:
+        - asset: assets/fonts/CrimsonPro-Medium.ttf
+    - family: CrimsonPro-Regular
+      fonts:
+        - asset: assets/fonts/CrimsonPro-Regular.ttf
+    - family: CrimsonPro-SemiBold
+      fonts:
+        - asset: assets/fonts/CrimsonPro-SemiBold.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

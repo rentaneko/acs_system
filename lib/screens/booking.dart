@@ -1,3 +1,4 @@
+import 'package:acs_1/screens/confirm_booking.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/gestures.dart';
@@ -13,14 +14,12 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingScreenState extends State<BookingScreen> {
   final items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
-
   final days = ['Chọn ngày', '9/3/2022', ' 10/3/2022', '11/3/2022'];
-
   final times = ['Chọn giờ', '10:30', '11:30', '14:30'];
-
   final cities = ['Hồ Chí Minh', 'Hà Nội'];
   final districs = ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4'];
   final wards = ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4'];
+  bool _isMale = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,7 +32,56 @@ class _BookingScreenState extends State<BookingScreen> {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  useSafeArea: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Bạn xác nhận thoát khỏi giao diện đặt lịch?',
+                        style: ACSTyphoghraphy.confirmHeading
+                            .copyWith(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                      actionsAlignment: MainAxisAlignment.spaceAround,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      insetPadding: const EdgeInsets.symmetric(horizontal: 22),
+                      contentPadding: const EdgeInsets.all(16),
+                      actionsPadding: const EdgeInsets.only(bottom: 16),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child:
+                              Text('Hủy', style: ACSTyphoghraphy.buttonTitle),
+                          style: ElevatedButton.styleFrom(
+                            primary: ACSColors.primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 5,
+                            minimumSize: const Size(130, 42),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Đồng ý',
+                              style: ACSTyphoghraphy.buttonTitle),
+                          style: ElevatedButton.styleFrom(
+                            primary: ACSColors.primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 5,
+                            minimumSize: const Size(130, 42),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
               icon: Image.asset(
                 'assets/icons/close-square.png',
                 color: ACSColors.white,
@@ -241,10 +289,58 @@ class _BookingScreenState extends State<BookingScreen> {
               bodyWidget: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: RadioListTile<bool>(
+                          value: true,
+                          groupValue: _isMale,
+                          onChanged: (val) {
+                            setState(() {
+                              _isMale = val ?? _isMale;
+                            });
+                          },
+                          title: const Text('Anh',
+                              style: ACSTyphoghraphy.radioTitle),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: RadioListTile<bool>(
+                          value: false,
+                          groupValue: _isMale,
+                          onChanged: (val) {
+                            setState(() {
+                              _isMale = val ?? _isMale;
+                            });
+                          },
+                          title: const Text('Chị',
+                              style: ACSTyphoghraphy.radioTitle),
+                        ),
+                      ),
+                    ],
+                  ),
                   const Padding(
                     padding: EdgeInsets.only(left: 16, top: 16),
-                    child:
-                        Text('Tên khách hàng', style: ACSTyphoghraphy.heading1),
+                    child: Text('Họ của bạn', style: ACSTyphoghraphy.heading1),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(
+                              color: ACSColors.primary, width: 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16, top: 16),
+                    child: Text('Tên của bạn', style: ACSTyphoghraphy.heading1),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(
@@ -307,7 +403,8 @@ class _BookingScreenState extends State<BookingScreen> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
-          onDone: () {},
+          onDone: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ConfirmBooking())),
         ),
       ),
     );
