@@ -1,5 +1,7 @@
 import 'package:acs_1/screens/booking.dart';
 import 'package:acs_1/screens/homepage.dart';
+import 'package:acs_1/screens/profile_screen.dart';
+import 'package:acs_1/screens/setting_screen.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,44 +21,46 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: PandaBar(
-        backgroundColor: ACSColors.primary,
-        buttonSelectedColor: ACSColors.white,
-        fabIcon:
-            const Icon(CupertinoIcons.add, color: ACSColors.white, size: 30),
-        fabColors: const [
-          ACSColors.primary,
-          ACSColors.primary,
-          ACSColors.primary,
-        ],
-        buttonData: [
-          PandaBarButtonData(
-            id: 'Home',
-            icon: Icons.home,
-            title: 'Home',
-          ),
-          PandaBarButtonData(
-            id: 'Appointment',
-            icon: CupertinoIcons.doc_text,
-            title: 'Appointment',
-          ),
-          PandaBarButtonData(
-            id: 'Profile',
-            icon: Icons.person,
-            title: 'Profile',
-          ),
-          PandaBarButtonData(
-            id: 'Setting',
-            icon: Icons.settings,
-            title: 'Setting',
-          ),
-        ],
-        onChange: (id) {
-          setState(() => page = id);
-        },
-        onFabButtonPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BookingScreen())),
+      bottomNavigationBar: SizedBox(
+        height: 100,
+        child: PandaBar(
+          backgroundColor: ACSColors.primary,
+          buttonSelectedColor: ACSColors.white,
+          fabIcon:
+              const Icon(CupertinoIcons.add, color: ACSColors.white, size: 30),
+          fabColors: const [
+            ACSColors.primary,
+            ACSColors.primary,
+            ACSColors.primary,
+          ],
+          buttonData: [
+            PandaBarButtonData(
+              id: 'Home',
+              icon: Icons.home,
+              title: 'Home',
+            ),
+            PandaBarButtonData(
+              id: 'Appointment',
+              icon: CupertinoIcons.doc_text,
+              title: 'Appointment',
+            ),
+            PandaBarButtonData(
+              id: 'Profile',
+              icon: Icons.person,
+              title: 'Profile',
+            ),
+            PandaBarButtonData(
+              id: 'Setting',
+              icon: Icons.settings,
+              title: 'Setting',
+            ),
+          ],
+          onChange: (id) {
+            setState(() => page = id);
+          },
+          onFabButtonPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BookingScreen())),
+        ),
       ),
       body: Builder(
         builder: (context) {
@@ -66,9 +70,9 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
             case 'Appointment':
               return Container(color: Colors.blue.shade900);
             case 'Profile':
-              return Container(color: Colors.red.shade900);
+              return const ProfileScreen();
             case 'Setting':
-              return Container(color: Colors.yellow.shade700);
+              return const SettingScreen();
             default:
               return Container();
           }

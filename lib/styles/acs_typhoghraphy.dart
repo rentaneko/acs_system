@@ -70,4 +70,10 @@ class ACSTyphoghraphy {
     fontWeight: FontWeight.w700,
     color: ACSColors.secondaryText,
   );
+
+  static const TextStyle listTitle = TextStyle(
+    fontFamily: 'CrimsonPro-SemiBold',
+    fontSize: 24,
+    color: ACSColors.secondaryText,
+  );
 }
