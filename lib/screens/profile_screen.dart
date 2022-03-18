@@ -11,116 +11,109 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: ACSColors.primary,
         extendBody: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'Hồ sơ cá nhân',
-            style: ACSTyphoghraphy.titleAppbar,
-          ),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Stack(
-                children: [
-                  Center(
-                    child: Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100)),
-                      child: ClipRRect(
-                        child: Image.asset('assets/images/avatar.jpg'),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(110),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            color: ACSColors.white,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ACSColors.white.withOpacity(0.5),
+                    ),
+                    child: const CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/avatar.jpg'),
+                      radius: 74,
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 115,
-                    child: IconButton(
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Text('Lưu Phương Uyên',
+                          style: ACSTyphoghraphy.profileTitle),
+                      Text('0378285566', style: ACSTyphoghraphy.profileTitle),
+                      Text('Thợ máy', style: ACSTyphoghraphy.profileTitle),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
                       onPressed: () {},
                       icon: Image.asset(
-                        'assets/icons/edit-square.png',
-                        height: 30,
-                        width: 30,
-                        color: ACSColors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Container(
-                padding: const EdgeInsets.all(22),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: ACSColors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                        'assets/icons/setting.png',
+                        color: ACSColors.secondaryText,
+                      )),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Họ tên',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text('Lưu Phương Uyên', style: ACSTyphoghraphy.heading1),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Ngày sinh',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text('01/01/1998', style: ACSTyphoghraphy.heading1),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Số điện thoại',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text('0378285566', style: ACSTyphoghraphy.heading1),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Email',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text('uyenlpse63216@fpt.edu.vn',
-                        style: ACSTyphoghraphy.heading1),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Địa chỉ',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    SizedBox(height: 10),
-                    Text('123 đường S11 phường An Lạc quận Bình Tân',
-                        style: ACSTyphoghraphy.heading1),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Chức vụ',
-                      style:
-                          ACSTyphoghraphy.confirmHeading.copyWith(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text('Thợ sửa chữa', style: ACSTyphoghraphy.heading1),
-                  ],
+              ],
+            ),
+          ),
+        ),
+        body: Container(
+          color: ACSColors.white,
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.only(top: 4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _profileListTitle(
+                  'assets/icons/argee.png', 'Thoả thuận sử dụng', () {}),
+              _profileListTitle(
+                  'assets/icons/key.png', 'Chính sách bảo mật', () {}),
+              _profileListTitle(
+                  'assets/icons/phone.png', 'Liên lạc và hỗ trợ', () {}),
+              _profileListTitle(
+                  'assets/icons/corporate.png', 'Thông tin công ty  ', () {}),
+              _profileListTitle('assets/icons/faqs.png', 'FAQs', () {}),
+              _profileListTitle(
+                  'assets/icons/information.png', 'Thông tin ứng dụng', () {}),
+              ListTile(
+                leading: Image.asset(
+                  'assets/icons/log-out.png',
+                  height: 24,
+                  width: 24,
                 ),
+                title: Text('Đăng xuất tài khoản',
+                    style: ACSTyphoghraphy.listTitle
+                        .copyWith(color: Color.fromRGBO(198, 33, 53, 1))),
+                onTap: () {},
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _profileListTitle(
+      String iconUrl, String title, VoidCallback function) {
+    return ListTile(
+      trailing: Image.asset(
+        'assets/icons/arrow-right.png',
+        color: ACSColors.secondaryText,
+        height: 24,
+        width: 24,
+      ),
+      leading: Image.asset(
+        iconUrl,
+        color: ACSColors.secondaryText,
+        height: 24,
+        width: 24,
+      ),
+      title: Text(title, style: ACSTyphoghraphy.listTitle),
+      onTap: function,
     );
   }
 }

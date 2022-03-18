@@ -17,6 +17,13 @@ class ACSTyphoghraphy {
 
   static const TextStyle stepNumber = TextStyle(
     color: ACSColors.white,
+    fontSize: 18,
+    fontFamily: 'Roboto',
+    fontWeight: FontWeight.w800,
+  );
+
+  static const TextStyle profileTitle = TextStyle(
+    color: ACSColors.secondaryText,
     fontSize: 16,
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w800,
@@ -73,7 +80,7 @@ class ACSTyphoghraphy {
 
   static const TextStyle listTitle = TextStyle(
     fontFamily: 'CrimsonPro-SemiBold',
-    fontSize: 24,
+    fontSize: 20,
     color: ACSColors.secondaryText,
   );
 }
