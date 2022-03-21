@@ -83,4 +83,32 @@ class ACSTyphoghraphy {
     fontSize: 20,
     color: ACSColors.secondaryText,
   );
+
+  static const TextStyle appointmentTitle = TextStyle(
+    fontFamily: 'CrimsonPro-Medium',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: ACSColors.secondaryText,
+  );
+
+  static const TextStyle appointmentDetail = TextStyle(
+    fontFamily: 'CrimsonPro-SemiBold',
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: ACSColors.secondaryText,
+  );
+
+  static const TextStyle title = TextStyle(
+    fontFamily: 'CrimsonPro-SemiBold',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: ACSColors.secondaryText,
+  );
+
+  static const TextStyle detail = TextStyle(
+    fontFamily: 'CrimsonPro-Light',
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: ACSColors.secondaryText,
+  );
 }

@@ -1,5 +1,6 @@
 import 'package:acs_1/screens/booking.dart';
-import 'package:acs_1/screens/category_screen.dart';
+import 'package:acs_1/screens/appointment.dart';
+import 'package:acs_1/screens/history.dart';
 import 'package:acs_1/screens/homepage.dart';
 import 'package:acs_1/screens/profile_screen.dart';
 import 'package:acs_1/styles/acs_colors.dart';
@@ -45,9 +46,9 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
               title: 'Appointment',
             ),
             PandaBarButtonData(
-              id: 'Category',
-              icon: CupertinoIcons.rectangle_grid_2x2,
-              title: 'Category',
+              id: 'History',
+              icon: Icons.receipt_outlined,
+              title: 'History',
             ),
             PandaBarButtonData(
               id: 'Profile',
@@ -68,9 +69,9 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
             case 'Home':
               return const HomeScreen();
             case 'Appointment':
-              return Container(color: Colors.blue.shade900);
-            case 'Category':
-              return const CategoryScreen();
+              return const AppointmentScreen();
+            case 'History':
+              return HistoryScreen();
             case 'Profile':
               return const ProfileScreen();
             default:

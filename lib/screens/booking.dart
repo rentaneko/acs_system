@@ -70,7 +70,7 @@ class _BookingScreenState extends State<BookingScreen> {
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                           },
-                          child: Text('Đồng ý',
+                          child: const Text('Đồng ý',
                               style: ACSTyphoghraphy.buttonTitle),
                           style: ElevatedButton.styleFrom(
                             primary: ACSColors.primary,
