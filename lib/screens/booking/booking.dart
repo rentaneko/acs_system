@@ -1,12 +1,15 @@
+import 'package:acs_1/controller/basic_controller.dart';
+import 'package:acs_1/controller/booking_controller.dart';
+import 'package:acs_1/models/service.dart';
 import 'package:acs_1/screens/booking/confirm_booking.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class BookingScreen extends StatefulWidget {
-  BookingScreen({Key? key}) : super(key: key);
+  const BookingScreen({Key? key}) : super(key: key);
 
   @override
   State<BookingScreen> createState() => _BookingScreenState();
@@ -20,6 +23,9 @@ class _BookingScreenState extends State<BookingScreen> {
   final districs = ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4'];
   final wards = ['Phường 1', 'Phường 2', 'Phường 3', 'Phường 4'];
   bool _isMale = false;
+
+  final controller = Get.find<BasicController>();
+  final bookingController = Get.find<BookingController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,57 +39,58 @@ class _BookingScreenState extends State<BookingScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  useSafeArea: true,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(
-                        'Bạn xác nhận thoát khỏi giao diện đặt lịch?',
-                        style: ACSTyphoghraphy.confirmHeading
-                            .copyWith(fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                      actionsAlignment: MainAxisAlignment.spaceAround,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(24)),
-                      ),
-                      insetPadding: const EdgeInsets.symmetric(horizontal: 22),
-                      contentPadding: const EdgeInsets.all(16),
-                      actionsPadding: const EdgeInsets.only(bottom: 16),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child:
-                              Text('Hủy', style: ACSTyphoghraphy.buttonTitle),
-                          style: ElevatedButton.styleFrom(
-                            primary: ACSColors.primary,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            elevation: 5,
-                            minimumSize: const Size(130, 42),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Đồng ý',
-                              style: ACSTyphoghraphy.buttonTitle),
-                          style: ElevatedButton.styleFrom(
-                            primary: ACSColors.primary,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            elevation: 5,
-                            minimumSize: const Size(130, 42),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                controller.fetchService();
+                // showDialog(
+                //   context: context,
+                //   barrierDismissible: false,
+                //   useSafeArea: true,
+                //   builder: (BuildContext context) {
+                //     return AlertDialog(
+                //       title: Text(
+                //         'Bạn xác nhận thoát khỏi giao diện đặt lịch?',
+                //         style: ACSTyphoghraphy.confirmHeading
+                //             .copyWith(fontSize: 20),
+                //         textAlign: TextAlign.center,
+                //       ),
+                //       actionsAlignment: MainAxisAlignment.spaceAround,
+                //       shape: const RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.all(Radius.circular(24)),
+                //       ),
+                //       insetPadding: const EdgeInsets.symmetric(horizontal: 22),
+                //       contentPadding: const EdgeInsets.all(16),
+                //       actionsPadding: const EdgeInsets.only(bottom: 16),
+                //       actions: [
+                //         ElevatedButton(
+                //           onPressed: () => Navigator.of(context).pop(),
+                //           child:
+                //               Text('Hủy', style: ACSTyphoghraphy.buttonTitle),
+                //           style: ElevatedButton.styleFrom(
+                //             primary: ACSColors.primary,
+                //             shape: RoundedRectangleBorder(
+                //                 borderRadius: BorderRadius.circular(8)),
+                //             elevation: 5,
+                //             minimumSize: const Size(130, 42),
+                //           ),
+                //         ),
+                //         ElevatedButton(
+                //           onPressed: () {
+                //             Navigator.of(context).pop();
+                //             Navigator.of(context).pop();
+                //           },
+                //           child: const Text('Đồng ý',
+                //               style: ACSTyphoghraphy.buttonTitle),
+                //           style: ElevatedButton.styleFrom(
+                //             primary: ACSColors.primary,
+                //             shape: RoundedRectangleBorder(
+                //                 borderRadius: BorderRadius.circular(8)),
+                //             elevation: 5,
+                //             minimumSize: const Size(130, 42),
+                //           ),
+                //         ),
+                //       ],
+                //     );
+                //   },
+                // );
               },
               icon: Image.asset(
                 'assets/icons/close-square.png',
@@ -429,14 +436,20 @@ class _BookingScreenState extends State<BookingScreen> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: ACSColors.primary, width: 1),
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              items: items.map(buildMenuItem).toList(),
-              icon: Image.asset('assets/icons/arrow-down.png'),
-              elevation: 0,
-              isExpanded: true,
-              onChanged: (value) {},
-              value: items[0],
+          child: Obx(
+            () => DropdownButtonHideUnderline(
+              child: DropdownButton<dynamic>(
+                items: bookingController.listNameService
+                    .map((e) => buildMenuItem(e))
+                    .toList(),
+                icon: Image.asset('assets/icons/arrow-down.png'),
+                elevation: 0,
+                isExpanded: true,
+                value: bookingController.serviceSelected.value,
+                onChanged: (value) {
+                  bookingController.setServiceSelected(value!);
+                },
+              ),
             ),
           ),
         ),
@@ -504,10 +517,7 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        child: Text(
-          item,
-          style: ACSTyphoghraphy.heading1,
-        ),
+        child: Text(item, style: ACSTyphoghraphy.heading1),
         value: item,
       );
 }
