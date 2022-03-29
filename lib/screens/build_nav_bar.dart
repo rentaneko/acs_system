@@ -1,11 +1,13 @@
-import 'package:acs_1/screens/booking.dart';
-import 'package:acs_1/screens/appointment.dart';
-import 'package:acs_1/screens/history.dart';
-import 'package:acs_1/screens/homepage.dart';
-import 'package:acs_1/screens/profile_screen.dart';
+import 'package:acs_1/controller/basic_controller.dart';
+import 'package:acs_1/screens/booking/booking.dart';
+import 'package:acs_1/screens/appointment/appointment.dart';
+import 'package:acs_1/screens/history/history.dart';
+import 'package:acs_1/screens/homepage/homepage.dart';
+import 'package:acs_1/screens/profile/profile_screen.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pandabar/main.view.dart';
 import 'package:pandabar/model.dart';
 
@@ -18,7 +20,6 @@ class BuildBottomNavBar extends StatefulWidget {
 
 class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
   String page = 'Home';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

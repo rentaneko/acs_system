@@ -1,4 +1,4 @@
-import 'package:acs_1/screens/confirm_booking.dart';
+import 'package:acs_1/screens/booking/confirm_booking.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/gestures.dart';
