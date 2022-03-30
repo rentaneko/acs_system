@@ -54,7 +54,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                 itemCount: listOrder.length,
                 shrinkWrap: true,
