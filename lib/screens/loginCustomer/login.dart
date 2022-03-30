@@ -1,5 +1,5 @@
 import 'package:acs_1/screens/homepage.dart';
-import 'package:acs_1/screens/login/getOPT.dart';
+import 'package:acs_1/screens/loginCustomer/getOPT.dart';
 import 'package:acs_1/screens/register/register.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';

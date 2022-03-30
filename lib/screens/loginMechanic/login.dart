@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+class LoginMechanicScreen extends StatefulWidget {
+  LoginMechanicScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginMechanicScreen> createState() => _LoginMechanicScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginMechanicScreenState extends State<LoginMechanicScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +25,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
               constraints: BoxConstraints.expand(),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -41,12 +40,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
+                    padding: EdgeInsets.fromLTRB(5, 20, 5, 40),
                     child: Text(
-                      'Họ và tên',
+                      'Chào mừng bạn trở lại',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 36,
+                          fontSize: 30,
+                          color: ACSColors.primary),
+                    ),
+                  ),
+                  Text(
+                    'Đăng nhập',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 36,
+                        color: ACSColors.primary),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
+                    child: Text(
+                      'Số điện thoại',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                           color: ACSColors.primary),
                     ),
                   ),
@@ -65,12 +83,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
+                    padding: EdgeInsets.fromLTRB(5, 20, 5, 0),
                     child: Text(
-                      'Email',
+                      'Mật khẩu',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 36,
+                          fontSize: 18,
                           color: ACSColors.primary),
                     ),
                   ),
@@ -89,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 140, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 90, 0, 0),
                     child: SizedBox(
                       width: double.infinity,
                       height: 46,
@@ -102,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         onPressed: onSendClicked,
                         child: Text(
-                          'Đăng ký',
+                          'Đăng nhập',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),
@@ -113,5 +131,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             )));
   }
 
-  void onSendClicked() {}
+  void onSendClicked() {
+    Get.to(() => GetOPTScreen());
+  }
+
+  void onRegisterClick() {
+    Get.to(() => RegisterScreen());
+  }
 }
