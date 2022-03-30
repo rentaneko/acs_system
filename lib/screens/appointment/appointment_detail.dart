@@ -1,11 +1,22 @@
+import 'package:acs_1/models/appointment.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppointmentDetail extends StatelessWidget {
-  const AppointmentDetail({Key? key}) : super(key: key);
+class AppointmentDetail extends StatefulWidget {
+  final Appointment appointment;
 
+  const AppointmentDetail({
+    Key? key,
+    required this.appointment,
+  }) : super(key: key);
+
+  @override
+  State<AppointmentDetail> createState() => _AppointmentDetailState();
+}
+
+class _AppointmentDetailState extends State<AppointmentDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +42,8 @@ class AppointmentDetail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child:
                       Text('Trạng thái', style: ACSTyphoghraphy.confirmTitle),
@@ -40,15 +51,17 @@ class AppointmentDetail extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    'Đang chờ',
-                    style: ACSTyphoghraphy.confirmSubTitle,
+                    widget.appointment.status,
+                    style: ACSTyphoghraphy.confirmSubTitle.copyWith(
+                      color: changeColorStatus(widget.appointment.status),
+                    ),
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Tên khách hàng',
                       style: ACSTyphoghraphy.confirmTitle),
@@ -56,15 +69,15 @@ class AppointmentDetail extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    'Chị Uyên',
+                    widget.appointment.fullname,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Số điện thoại',
                       style: ACSTyphoghraphy.confirmTitle),
@@ -72,82 +85,82 @@ class AppointmentDetail extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    '0378285566',
+                    widget.appointment.phone,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Dịch vụ', style: ACSTyphoghraphy.confirmTitle),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
-                    'Bảo trì máy lạnh',
+                    widget.appointment.serviceType,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Số lượng', style: ACSTyphoghraphy.confirmTitle),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
-                    '3',
+                    widget.appointment.quantity,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Thời gian', style: ACSTyphoghraphy.confirmTitle),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
-                    '8:00 - 9:00',
+                    widget.appointment.time,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Ngày hẹn', style: ACSTyphoghraphy.confirmTitle),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
-                    '14/02/2022',
+                    widget.appointment.date,
                     style: ACSTyphoghraphy.confirmSubTitle,
                   ),
                 ),
               ],
             ),
             Row(
-              children: const [
-                Expanded(
+              children: [
+                const Expanded(
                   flex: 1,
                   child: Text('Địa chỉ', style: ACSTyphoghraphy.confirmTitle),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
-                    'Số 123 đường S11 - Phường An Lạc - Quận Bình Tân',
+                    widget.appointment.address,
                     style: ACSTyphoghraphy.confirmSubTitle,
                     overflow: TextOverflow.clip,
                   ),
@@ -159,38 +172,47 @@ class AppointmentDetail extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                'Hủy đơn',
-                style: ACSTyphoghraphy.buttonTitle,
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: ACSColors.red,
-                  padding: const EdgeInsets.all(10),
-                  minimumSize: const Size(160, 48),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                'Đóng',
-                style: ACSTyphoghraphy.buttonTitle,
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: ACSColors.primary,
-                  padding: const EdgeInsets.all(10),
-                  minimumSize: const Size(160, 48),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: changeStateButton(widget.appointment.status),
+          child: const Text(
+            'Hủy đơn',
+            style: ACSTyphoghraphy.buttonTitle,
+          ),
+          style: ElevatedButton.styleFrom(
+              primary: ACSColors.red,
+              padding: const EdgeInsets.all(10),
+              minimumSize: const Size(160, 48),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10))),
         ),
       ),
     );
+  }
+
+  String changeIconStatus(String status) {
+    if (status.toLowerCase().contains('đã hủy')) {
+      return 'assets/icons/error.png';
+    } else if (status.toLowerCase().contains('hoàn tất')) {
+      return 'assets/icons/check.png';
+    }
+    return 'assets/icons/waiting.png';
+  }
+
+  Color changeColorStatus(String status) {
+    if (status.toLowerCase().contains('đã hủy')) {
+      return Colors.red;
+    } else if (status.toLowerCase().contains('hoàn tất')) {
+      return Colors.green;
+    }
+    return Colors.blue;
+  }
+
+  VoidCallback? changeStateButton(String status) {
+    if (status.toLowerCase().contains('đã hủy')) {
+      return null;
+    } else if (status.toLowerCase().contains('hoàn tất')) {
+      return null;
+    }
+    return () {};
   }
 }

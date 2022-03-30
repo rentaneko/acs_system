@@ -6,6 +6,6 @@ class ControllerBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(BasicController());
-    Get.put(BookingController());
+    // Get.put(BookingController());
   }
 }

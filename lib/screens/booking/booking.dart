@@ -25,7 +25,6 @@ class _BookingScreenState extends State<BookingScreen> {
   bool _isMale = false;
 
   final controller = Get.find<BasicController>();
-  final bookingController = Get.find<BookingController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,58 +38,57 @@ class _BookingScreenState extends State<BookingScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                controller.fetchService();
-                // showDialog(
-                //   context: context,
-                //   barrierDismissible: false,
-                //   useSafeArea: true,
-                //   builder: (BuildContext context) {
-                //     return AlertDialog(
-                //       title: Text(
-                //         'Bạn xác nhận thoát khỏi giao diện đặt lịch?',
-                //         style: ACSTyphoghraphy.confirmHeading
-                //             .copyWith(fontSize: 20),
-                //         textAlign: TextAlign.center,
-                //       ),
-                //       actionsAlignment: MainAxisAlignment.spaceAround,
-                //       shape: const RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.all(Radius.circular(24)),
-                //       ),
-                //       insetPadding: const EdgeInsets.symmetric(horizontal: 22),
-                //       contentPadding: const EdgeInsets.all(16),
-                //       actionsPadding: const EdgeInsets.only(bottom: 16),
-                //       actions: [
-                //         ElevatedButton(
-                //           onPressed: () => Navigator.of(context).pop(),
-                //           child:
-                //               Text('Hủy', style: ACSTyphoghraphy.buttonTitle),
-                //           style: ElevatedButton.styleFrom(
-                //             primary: ACSColors.primary,
-                //             shape: RoundedRectangleBorder(
-                //                 borderRadius: BorderRadius.circular(8)),
-                //             elevation: 5,
-                //             minimumSize: const Size(130, 42),
-                //           ),
-                //         ),
-                //         ElevatedButton(
-                //           onPressed: () {
-                //             Navigator.of(context).pop();
-                //             Navigator.of(context).pop();
-                //           },
-                //           child: const Text('Đồng ý',
-                //               style: ACSTyphoghraphy.buttonTitle),
-                //           style: ElevatedButton.styleFrom(
-                //             primary: ACSColors.primary,
-                //             shape: RoundedRectangleBorder(
-                //                 borderRadius: BorderRadius.circular(8)),
-                //             elevation: 5,
-                //             minimumSize: const Size(130, 42),
-                //           ),
-                //         ),
-                //       ],
-                //     );
-                //   },
-                // );
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  useSafeArea: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Bạn xác nhận thoát khỏi giao diện đặt lịch?',
+                        style: ACSTyphoghraphy.confirmHeading
+                            .copyWith(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                      actionsAlignment: MainAxisAlignment.spaceAround,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      insetPadding: const EdgeInsets.symmetric(horizontal: 22),
+                      contentPadding: const EdgeInsets.all(16),
+                      actionsPadding: const EdgeInsets.only(bottom: 16),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child:
+                              Text('Hủy', style: ACSTyphoghraphy.buttonTitle),
+                          style: ElevatedButton.styleFrom(
+                            primary: ACSColors.primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 5,
+                            minimumSize: const Size(130, 42),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Đồng ý',
+                              style: ACSTyphoghraphy.buttonTitle),
+                          style: ElevatedButton.styleFrom(
+                            primary: ACSColors.primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 5,
+                            minimumSize: const Size(130, 42),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               icon: Image.asset(
                 'assets/icons/close-square.png',
@@ -186,7 +184,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        items: cities.map(buildMenuItem).toList(),
+                        items: cities.map(buildMenuItem2).toList(),
                         icon: Image.asset('assets/icons/arrow-down.png'),
                         elevation: 0,
                         isExpanded: true,
@@ -212,7 +210,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        items: districs.map(buildMenuItem).toList(),
+                        items: districs.map(buildMenuItem2).toList(),
                         icon: Image.asset('assets/icons/arrow-down.png'),
                         elevation: 0,
                         isExpanded: true,
@@ -238,7 +236,7 @@ class _BookingScreenState extends State<BookingScreen> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        items: wards.map(buildMenuItem).toList(),
+                        items: wards.map(buildMenuItem2).toList(),
                         icon: Image.asset('assets/icons/arrow-down.png'),
                         elevation: 0,
                         isExpanded: true,
@@ -439,15 +437,15 @@ class _BookingScreenState extends State<BookingScreen> {
           child: Obx(
             () => DropdownButtonHideUnderline(
               child: DropdownButton<dynamic>(
-                items: bookingController.listNameService
-                    .map((e) => buildMenuItem(e))
+                items: controller.listServices
+                    .map((e) => buildMenuItem1(e))
                     .toList(),
                 icon: Image.asset('assets/icons/arrow-down.png'),
                 elevation: 0,
                 isExpanded: true,
-                value: bookingController.serviceSelected.value,
+                value: controller.serviceSelected.value,
                 onChanged: (value) {
-                  bookingController.setServiceSelected(value!);
+                  controller.setServiceSelected(value!);
                 },
               ),
             ),
@@ -484,7 +482,7 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              items: days.map(buildMenuItem).toList(),
+              items: days.map(buildMenuItem2).toList(),
               icon: Image.asset('assets/icons/arrow-down.png'),
               elevation: 0,
               isExpanded: true,
@@ -503,7 +501,7 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              items: times.map(buildMenuItem).toList(),
+              items: times.map(buildMenuItem2).toList(),
               icon: Image.asset('assets/icons/arrow-down.png'),
               elevation: 0,
               isExpanded: true,
@@ -516,7 +514,12 @@ class _BookingScreenState extends State<BookingScreen> {
     );
   }
 
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+  DropdownMenuItem<dynamic> buildMenuItem1(dynamic item) => DropdownMenuItem(
+        child: Text(item.name, style: ACSTyphoghraphy.heading1),
+        value: item.id,
+      );
+
+  DropdownMenuItem<String> buildMenuItem2(String item) => DropdownMenuItem(
         child: Text(item, style: ACSTyphoghraphy.heading1),
         value: item,
       );

@@ -18,7 +18,8 @@ class BasicController extends GetxController {
   var listCities = <City>[].obs;
   var listDistrics = <Distric>[].obs;
   var listWards = <Ward>[].obs;
-  var listService = <ServiceModel>[].obs;
+  var listServices = <ServiceModel>[].obs;
+  var serviceSelected = ''.obs;
   var isLoading = true.obs;
 
 // lấy danh sách thành phố
@@ -106,13 +107,22 @@ class BasicController extends GetxController {
             typeId: json[i]['type_id'].toString(),
             status: json[i]['status'].toString(),
           );
-          listService.add(service);
+          listServices.add(service);
         }
+        print(listServices.length);
       }
     } catch (e) {
       log('Error fetchService at Basic Controller');
       log(e.toString());
     }
+  }
+
+  void setServiceSelected(String value) {
+    serviceSelected.value = value;
+  }
+
+  Future<void> initialValue() async {
+    serviceSelected.value = listServices[0].id;
   }
 
   @override
@@ -123,8 +133,10 @@ class BasicController extends GetxController {
         fetchAllDistric(),
         fetchAllWard(),
         fetchService(),
+        initialValue(),
       ],
     );
+
     isLoading.value = false;
     super.onInit();
   }
