@@ -1,5 +1,6 @@
 import 'package:acs_1/screens/booking.dart';
 import 'package:acs_1/screens/build_nav_bar.dart';
+import 'package:acs_1/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +14,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: BuildBottomNavBar(),
+    return GetMaterialApp(
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
