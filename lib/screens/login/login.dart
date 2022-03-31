@@ -1,3 +1,4 @@
+import 'package:acs_1/screens/build_nav_bar.dart';
 import 'package:acs_1/screens/register/register.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
             )));
   }
 
-  void onSendClicked() {}
+  void onSendClicked() {
+    Get.to(() => const BuildBottomNavBar());
+  }
 
   void onRegisterClick() {
     Get.to(() => const RegisterScreen());

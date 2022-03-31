@@ -1,6 +1,8 @@
+import 'package:acs_1/screens/login/login.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -87,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 title: Text('Đăng xuất tài khoản',
                     style: ACSTyphoghraphy.listTitle
-                        .copyWith(color: Color.fromRGBO(198, 33, 53, 1))),
+                        .copyWith(color: const Color.fromRGBO(198, 33, 53, 1))),
                 onTap: () {},
               ),
             ],
