@@ -1,6 +1,7 @@
 import 'package:acs_1/controller/controller_binding.dart';
 import 'package:acs_1/screens/booking/booking.dart';
 import 'package:acs_1/screens/build_nav_bar.dart';
+import 'package:acs_1/screens/login/login.dart';
 import 'package:acs_1/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: ControllerBinding(),
-      home: const SplashScreen(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
