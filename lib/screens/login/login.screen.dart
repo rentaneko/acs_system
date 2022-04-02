@@ -1,17 +1,14 @@
-import 'package:acs_1/screens/build_nav_bar.dart';
+  import 'package:acs_1/screens/build_nav_bar.dart';
+import 'package:acs_1/screens/login/login.controller.dart';
 import 'package:acs_1/screens/register/register.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends GetWidget<LoginController> {
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  const LoginScreen({Key? key}) : super(key: key);
 
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(8)),
                           hintText: 'Nhập số điện thoại',
                           labelStyle:
-                              TextStyle(color: Color(0xf888888), fontSize: 15)),
+                          TextStyle(color: Color(0xf888888), fontSize: 15)),
                     ),
                     const SizedBox(height: 20),
                     const Text(
@@ -81,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(8)),
                           hintText: 'Nhập mật khẩu',
                           labelStyle:
-                              TextStyle(color: Color(0xf888888), fontSize: 15)),
+                          TextStyle(color: Color(0xf888888), fontSize: 15)),
                     ),
                     const SizedBox(height: 40),
                     SizedBox(
@@ -92,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           primary: ACSColors.primary,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
+                              BorderRadius.all(Radius.circular(8))),
                         ),
                         onPressed: onSendClicked,
                         child: const Text(
@@ -128,3 +125,4 @@ class _LoginScreenState extends State<LoginScreen> {
     Get.to(() => const RegisterScreen());
   }
 }
+

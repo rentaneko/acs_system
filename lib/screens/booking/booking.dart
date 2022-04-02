@@ -1,6 +1,4 @@
 import 'package:acs_1/controller/basic_controller.dart';
-import 'package:acs_1/controller/booking_controller.dart';
-import 'package:acs_1/models/service.dart';
 import 'package:acs_1/screens/booking/confirm_booking.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';

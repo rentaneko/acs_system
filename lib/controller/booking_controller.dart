@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:acs_1/apis/base_url.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../repository/apis/base_url.dart';
 
 class BookingController extends GetxController {
   var serviceSelected = ''.obs;

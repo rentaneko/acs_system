@@ -1,9 +1,10 @@
-import 'package:acs_1/models/dummy_data.dart';
 import 'package:acs_1/screens/history/history_detail.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../repository/models/dummy_data.dart';
 
 class HistoryScreen extends StatefulWidget {
   HistoryScreen({Key? key}) : super(key: key);
