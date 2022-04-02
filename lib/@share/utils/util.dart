@@ -29,3 +29,5 @@ showLoading([String? content]) => EasyLoading.show(
     status: content ?? "");
 
 hideLoading() => EasyLoading.dismiss();
+
+showSnackBar({required String title, required String content }) => Get.snackbar(title, content);

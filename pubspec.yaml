@@ -23,9 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  introduction_screen: ^3.0.0
-  get: ^4.5.1
+  cupertino_icons: ^1.0.4
+  introduction_screen: ^3.0.2
+  get: ^4.6.1
   persistent_bottom_nav_bar: ^4.0.2
   pandabar: ^0.1.2
   http: ^0.13.4
@@ -33,13 +33,13 @@ dependencies:
   get_storage: ^2.0.3
   velocity_x: ^3.4.0
   dio: ^4.0.6
-  global_configuration: any
-  flutter_easyloading: ^2.2.2
+  global_configuration: ^2.0.0-nullsafety.1
+  flutter_easyloading: ^3.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 flutter:
   uses-material-design: true

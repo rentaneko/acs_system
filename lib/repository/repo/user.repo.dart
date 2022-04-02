@@ -6,10 +6,18 @@ class UserRepo {
 
   UserRepo(this.userApi);
 
-  Future<dynamic> loginManual({required String email, required String password, required String fcmToken}) async {
-    var res = await userApi.loginManual(
-        {'email': email, 'password': password, 'fcm_token': fcmToken});
-    return res?.success == true ? "LoginInfoModel.fromMap(res.data)" : null;
+  Future<dynamic> login({required String username, required String password}) async {
+    var res = await userApi.login({'username': username, 'password': password});
+    return res?.success == true ? res?.data : null;
   }
 
+  Future<dynamic> register({required String phone, required String username, required String password, required String email}) async {
+    var res = await userApi.register({'username': username, 'password': password, 'phone': phone, 'email': email});
+    return res?.success == true ? res?.data : null;
+  }
+
+  Future<dynamic> getMyPage() async {
+    var res = await userApi.getMyPage();
+    return res?.success == true ? "UserInfoModel.fromMap(res.data)" : null;
+  }
 }

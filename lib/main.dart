@@ -4,6 +4,7 @@ import 'package:acs_1/screens/build_nav_bar.dart';
 import 'package:acs_1/screens/login/login.screen.dart';
 import 'package:acs_1/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '@share/router/pages.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: ControllerBinding(),
+      builder: (_, child) => FlutterEasyLoading(child: child),
       initialRoute: ROUTER_LOGIN,
       getPages: Routers.route,
       debugShowCheckedModeBanner: false,

@@ -12,7 +12,7 @@ class BaseConnect extends GetConnect {
   @override
   void onInit() {
     httpClient
-      ..baseUrl = GlobalConfiguration().get(BASE_URL)
+      ..baseUrl = BASE_URL
       ..maxAuthRetries = MAX_AUTH_RETRIES
       ..timeout = const Duration(seconds: MAX_TIME_OUT)
       ..defaultContentType = CONTENT_TYPE
@@ -34,7 +34,6 @@ class BaseConnect extends GetConnect {
       Get.log('[RESPONSE] : ${response.body?.toMap()}');
       return response.body;
     } else {
-      dispose();
       hideLoading();
       return BaseResponse(
           success: false,
@@ -51,7 +50,6 @@ class BaseConnect extends GetConnect {
       Get.log('[RESPONSE] : ${response.body?.toMap()}');
       return response.body;
     } else {
-      dispose();
       hideLoading();
       return BaseResponse(
           success: false,
