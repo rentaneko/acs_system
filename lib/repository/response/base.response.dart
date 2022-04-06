@@ -26,14 +26,14 @@ class BaseResponse {
   factory BaseResponse.fromMap(dynamic map) {
     return map is Map
         ? BaseResponse(
-            status: map['status'] as int,
-            code: map['code'] as int,
-            isBlock: map['isBlock'] as int,
-            isFirstLogin: map['isFirstLogin'] as int,
-            success: map['success'] as bool,
-            message: map['message'] as String,
+            status: map['status'] as int?,
+            code: map['code'] as int?,
+            isBlock: map['isBlock'] as int?,
+            isFirstLogin: map['isFirstLogin'] as int?,
+            success: map['success'] as bool?,
+            message: map['message'] as String?,
             data: map['data'],
-            errors: map['errors'] as List<ErrorMessageModel>,
+            errors: map['errors'] as List<ErrorMessageModel>?,
           )
         : BaseResponse();
   }

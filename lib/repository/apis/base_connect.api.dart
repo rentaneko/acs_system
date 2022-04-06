@@ -28,8 +28,7 @@ class BaseConnect extends GetConnect {
 
   Future<BaseResponse?> getResponse(String url, {dynamic query}) async {
     Get.log('[QUERY] : $query');
-    var response = await get(url,
-        query: query, decoder: (map) => BaseResponse.fromMap(map));
+    var response = await get(url, query: query, decoder: (map) => BaseResponse.fromMap(map));
     if (response.isOk) {
       Get.log('[RESPONSE] : ${response.body?.toMap()}');
       return response.body;
@@ -42,10 +41,10 @@ class BaseConnect extends GetConnect {
     }
   }
 
-  Future<BaseResponse?> postRequest(String url, {dynamic body}) async {
+  Future<BaseResponse?> postRequest(String url, {dynamic body, dynamic query}) async {
     Get.log('[BODY] : ${body.toString()}');
     var response =
-    await post(url, body, decoder: (map) => BaseResponse.fromMap(map));
+    await post(url, body, decoder: (map) => BaseResponse.fromMap(map), query: query);
     if (response.isOk) {
       Get.log('[RESPONSE] : ${response.body?.toMap()}');
       return response.body;

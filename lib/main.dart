@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: ControllerBinding(),
       builder: (_, child) => FlutterEasyLoading(child: child),
       initialRoute: ROUTER_LOGIN,
       getPages: Routers.route,

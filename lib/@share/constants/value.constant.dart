@@ -1,6 +1,6 @@
 import 'package:acs_1/repository/apis/base_url.dart';
 
-const BASE_URL = ApiUrl.baseUrl;
+const BASE_URL = "https://acsproject.azurewebsites.net";
 const BEARER = "Bearer";
 const AUTHORIZATION = "Authorization";
 const CONTENT_TYPE = "application/json; charset=utf-8";

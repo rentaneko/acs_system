@@ -21,7 +21,7 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
-    if (loginFormKey.currentState?.validate() == true) {
+    /*if (loginFormKey.currentState?.validate() == true) {
       showLoading();
       await _userRepo
           .login(
@@ -34,7 +34,8 @@ class LoginController extends GetxController {
                   showSnackBar(title: "Error", content: "Login fail"),
                 hideLoading()
               });
-    }
+    }*/
+    Get.to(() => const BuildBottomNavBar());
   }
 
   @override
