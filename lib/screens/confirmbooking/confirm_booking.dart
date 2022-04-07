@@ -1,8 +1,10 @@
+import 'package:acs_1/screens/confirmbooking/confirm_booking.controller.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ConfirmBooking extends StatelessWidget {
+class ConfirmBooking extends GetWidget<ConfirmBookingController> {
   const ConfirmBooking({Key? key}) : super(key: key);
 
   @override

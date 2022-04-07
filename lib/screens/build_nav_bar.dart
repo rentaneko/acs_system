@@ -1,3 +1,5 @@
+import 'package:acs_1/@share/router/pages.dart';
+import 'package:acs_1/@share/utils/util.dart';
 import 'package:acs_1/controller/basic_controller.dart';
 import 'package:acs_1/screens/booking/booking.dart';
 import 'package:acs_1/screens/appointment/appointment.dart';
@@ -62,8 +64,7 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
             onChange: (id) {
               setState(() => page = id);
             },
-            onFabButtonPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BookingScreen())),
+            onFabButtonPressed: () => goTo(screen: ROUTER_BOOKING),
           ),
         ),
         body: Builder(

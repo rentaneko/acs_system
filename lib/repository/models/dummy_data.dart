@@ -1,5 +1,6 @@
-import 'package:acs_1/models/appointment.dart';
-import 'package:acs_1/models/order_detail.dart';
+
+import 'package:acs_1/repository/models/appointment.dart';
+import 'package:acs_1/repository/models/order_detail.dart';
 
 var listAppointment = [
   Appointment(

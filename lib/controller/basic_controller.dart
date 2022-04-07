@@ -1,12 +1,14 @@
+/*
 import 'dart:convert';
 import 'dart:developer';
-import 'package:acs_1/apis/base_url.dart';
-import 'package:acs_1/models/city.dart';
-import 'package:acs_1/models/distric.dart';
-import 'package:acs_1/models/service.dart';
-import 'package:acs_1/models/ward.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../repository/apis/base_url.dart';
+import '../repository/models/city.dart';
+import '../repository/models/distric.dart';
+import '../repository/models/service.dart';
+import '../repository/models/ward.dart';
 
 class BasicController extends GetxController {
   final _getCity = ApiUrl.baseUrl + ApiUrl.getAllCity;
@@ -141,3 +143,4 @@ class BasicController extends GetxController {
     super.onInit();
   }
 }
+*/
