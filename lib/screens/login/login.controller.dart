@@ -1,7 +1,5 @@
-import 'package:acs_1/@share/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../repository/repo/user.repo.dart';
 import '../build_nav_bar.dart';
 
@@ -12,10 +10,11 @@ class LoginController extends GetxController {
   final loginFormKey = GlobalKey<FormState>();
 
   String? validator(String? value) {
-    String pattern = r'^(?:[+0]9)?[0-9]{10}$';
-    RegExp regex = RegExp(pattern);
-    if (value == null || value.isEmpty || !regex.hasMatch(value)) {
-      return 'Phone number is invalidate !';
+    if (value == null ||
+        value.isEmpty ||
+        value.length < 10 ||
+        value.length > 40) {
+      return 'Tên tài khoản không hợp lệ !';
     }
     return null;
   }

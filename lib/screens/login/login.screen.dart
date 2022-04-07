@@ -1,14 +1,12 @@
-  import 'package:acs_1/@share/router/pages.dart';
+import 'package:acs_1/@share/router/pages.dart';
 import 'package:acs_1/@share/utils/util.dart';
 import 'package:acs_1/screens/build_nav_bar.dart';
 import 'package:acs_1/screens/login/login.controller.dart';
-import 'package:acs_1/screens/register/register.screen.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends GetWidget<LoginController> {
-
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -26,10 +24,12 @@ class LoginScreen extends GetWidget<LoginController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(
-                        width: 200,
-                        height: 150,
-                        child: Image.asset('assets/images/logo.png'),
+                      Center(
+                        child: SizedBox(
+                          width: 200,
+                          height: 150,
+                          child: Image.asset('assets/images/logo.png'),
+                        ),
                       ),
                       const SizedBox(height: 0),
                       const Text(
@@ -42,7 +42,7 @@ class LoginScreen extends GetWidget<LoginController> {
                       ),
                       const SizedBox(height: 30),
                       const Text(
-                        'Số điện thoại',
+                        'Tên tài khoản',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -60,9 +60,9 @@ class LoginScreen extends GetWidget<LoginController> {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8)),
-                            hintText: 'Nhập số điện thoại',
-                            labelStyle:
-                            TextStyle(color: Color(0xf888888), fontSize: 15)),
+                            hintText: 'Nhập tên tài khoản',
+                            labelStyle: TextStyle(
+                                color: Color(0xf888888), fontSize: 15)),
                       ),
                       const SizedBox(height: 20),
                       const Text(
@@ -84,8 +84,8 @@ class LoginScreen extends GetWidget<LoginController> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             hintText: 'Nhập mật khẩu',
-                            labelStyle:
-                            TextStyle(color: Color(0xf888888), fontSize: 15)),
+                            labelStyle: TextStyle(
+                                color: Color(0xf888888), fontSize: 15)),
                       ),
                       const SizedBox(height: 40),
                       SizedBox(
@@ -96,7 +96,7 @@ class LoginScreen extends GetWidget<LoginController> {
                             primary: ACSColors.primary,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(8))),
+                                    BorderRadius.all(Radius.circular(8))),
                           ),
                           onPressed: () => controller.login(),
                           child: const Text(
@@ -133,4 +133,3 @@ class LoginScreen extends GetWidget<LoginController> {
     goTo(screen: ROUTER_REGISTER);
   }
 }
-

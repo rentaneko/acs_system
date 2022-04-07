@@ -12,12 +12,12 @@ class RegisterController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
-
+  final accountNameController = TextEditingController();
   String? validatorPhone(String? value) {
     String pattern = r'^(?:[+0]9)?[0-9]{10}$';
     RegExp regex = RegExp(pattern);
     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
-      return 'Phone number is invalidate !';
+      return 'Số điện thoại không hợp lệ !';
     }
     return null;
   }
@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
         value.isEmpty ||
         value.length < 8 ||
         value.length > 12) {
-      return 'Password is invalidate !';
+      return 'Mật khẩu phải có ít nhất từ 8 đến 12 ký tự !';
     }
     return null;
   }
@@ -37,7 +37,17 @@ class RegisterController extends GetxController {
         value.isEmpty ||
         value.length < 10 ||
         value.length > 40) {
-      return 'Name is invalidate !';
+      return 'Tên của bạn không hợp lệ !';
+    }
+    return null;
+  }
+
+  String? validatorAccountName(String? value) {
+    if (value == null ||
+        value.isEmpty ||
+        value.length < 10 ||
+        value.length > 40) {
+      return 'Tên tài khoản không hợp lệ !';
     }
     return null;
   }
@@ -47,7 +57,7 @@ class RegisterController extends GetxController {
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regex = RegExp(pattern);
     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
-      return 'Email is invalidate !';
+      return 'Định dạng email không hợp lệ !';
     }
     return null;
   }
@@ -69,6 +79,7 @@ class RegisterController extends GetxController {
 
   @override
   void onClose() {
+    accountNameController.dispose();
     userNameController.dispose();
     passwordController.dispose();
     phoneNumberController.dispose();

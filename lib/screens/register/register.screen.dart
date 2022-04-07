@@ -14,18 +14,18 @@ class RegisterScreen extends GetWidget<RegisterController> {
             body: Container(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: SingleChildScrollView(
-                reverse: true,
                 child: Form(
                   key: controller.registerFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        height: 150,
-                        alignment: Alignment.center,
-                        child: Image.asset('assets/images/logo.png'),
+                      Center(
+                        child: SizedBox(
+                          width: 200,
+                          height: 150,
+                          child: Image.asset('assets/images/logo.png'),
+                        ),
                       ),
                       const Center(
                         child: Text(
@@ -38,6 +38,53 @@ class RegisterScreen extends GetWidget<RegisterController> {
                         ),
                       ),
                       const SizedBox(height: 30),
+                      // username
+                      const Text(
+                        'Tên tài khoản',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 22,
+                            color: ACSColors.primary),
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: controller.accountNameController,
+                        validator: controller.validatorAccountName,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                        decoration: InputDecoration(
+                            hintText: 'Nhập tên tài khoản',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            labelStyle: const TextStyle(fontSize: 15)),
+                      ),
+
+                      const SizedBox(height: 20),
+                      // mật khẩu
+                      const Text(
+                        'Mật khẩu',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 22,
+                            color: ACSColors.primary),
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: controller.passwordController,
+                        validator: controller.validatorPassword,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                        decoration: InputDecoration(
+                            hintText: 'Nhập mật khẩu',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            labelStyle: const TextStyle(fontSize: 15)),
+                      ),
+                      const SizedBox(height: 20),
                       // số điện thoại
                       const Text(
                         'Số điện thoại',
@@ -60,29 +107,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                                 borderRadius: BorderRadius.circular(12)),
                             labelStyle: const TextStyle(fontSize: 15)),
                       ),
-                      // mật khẩu
-                      const SizedBox(height: 20),
-                      const Text(
-                        'Mật khẩu',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
-                            color: ACSColors.primary),
-                      ),
-                      const SizedBox(height: 12),
-                      TextFormField(
-                        controller: controller.passwordController,
-                        validator: controller.validatorPassword,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                        decoration: InputDecoration(
-                            hintText: 'Nhập mật khẩu',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            labelStyle: const TextStyle(fontSize: 15)),
-                      ),
+
                       const SizedBox(height: 20),
                       // họ tên
                       const Text(
@@ -141,7 +166,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                                   primary: ACSColors.primary,
                                   shape: const RoundedRectangleBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
+                                        BorderRadius.all(Radius.circular(8)),
                                   ),
                                   minimumSize: const Size(140, 42),
                                 ),
@@ -160,7 +185,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                                   primary: ACSColors.primary,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(8))),
+                                          BorderRadius.all(Radius.circular(8))),
                                   minimumSize: const Size(140, 42),
                                 ),
                                 onPressed: () => controller.register(),
@@ -174,11 +199,11 @@ class RegisterScreen extends GetWidget<RegisterController> {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
               ),
             )));
   }
-
 }

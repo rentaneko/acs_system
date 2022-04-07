@@ -1,12 +1,6 @@
-import 'package:acs_1/controller/controller_binding.dart';
-import 'package:acs_1/screens/booking/booking.dart';
-import 'package:acs_1/screens/build_nav_bar.dart';
-import 'package:acs_1/screens/login/login.screen.dart';
-import 'package:acs_1/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
 import '@share/router/pages.dart';
 import '@share/router/router.dart';
 
@@ -22,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       builder: (_, child) => FlutterEasyLoading(child: child),
-      initialRoute: ROUTER_LOGIN,
+      initialRoute: ROUTER_BOOKING,
       getPages: Routers.route,
       debugShowCheckedModeBanner: false,
     );
