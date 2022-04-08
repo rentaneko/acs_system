@@ -6,7 +6,6 @@ import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-
 import '../../repository/models/city.dart';
 import '../../repository/models/service.dart';
 import 'booking.controller.dart';
@@ -90,7 +89,8 @@ class BookingScreen extends GetWidget<BookingController> {
           ],
           title: const Text('Đặt lịch', style: ACSTyphoghraphy.titleAppbar),
         ),
-        body: Obx(() => IntroductionScreen(
+        body: Obx(
+          () => IntroductionScreen(
             key: controller.introKey,
             freeze: true,
             showBackButton: false,
@@ -177,7 +177,9 @@ class BookingScreen extends GetWidget<BookingController> {
                       ),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<City>(
-                          items: controller.listCity.map((e) => buildMenuItemCity(e)).toList(),
+                          items: controller.listCity
+                              .map((e) => buildMenuItemCity(e))
+                              .toList(),
                           icon: Image.asset('assets/icons/arrow-down.png'),
                           elevation: 0,
                           isExpanded: true,
@@ -188,7 +190,9 @@ class BookingScreen extends GetWidget<BookingController> {
                               controller.districtSelected.value = District();
                             }
                           },
-                          value: controller.citySelected.value.id != null ? controller.citySelected.value : null,
+                          value: controller.citySelected.value.id != null
+                              ? controller.citySelected.value
+                              : null,
                         ),
                       ),
                     ),
@@ -222,7 +226,9 @@ class BookingScreen extends GetWidget<BookingController> {
                               controller.wardSelected.value = Ward();
                             }
                           },
-                          value: controller.districtSelected.value.id != null ? controller.districtSelected.value : null,
+                          value: controller.districtSelected.value.id != null
+                              ? controller.districtSelected.value
+                              : null,
                         ),
                       ),
                     ),
@@ -254,7 +260,9 @@ class BookingScreen extends GetWidget<BookingController> {
                               controller.wardSelected.value = value;
                             }
                           },
-                          value: controller.wardSelected.value.id != null ? controller.wardSelected.value : null,
+                          value: controller.wardSelected.value.id != null
+                              ? controller.wardSelected.value
+                              : null,
                         ),
                       ),
                     ),
@@ -373,8 +381,8 @@ class BookingScreen extends GetWidget<BookingController> {
                       ),
                       const Padding(
                         padding: EdgeInsets.only(left: 16, top: 16),
-                        child:
-                            Text('Tên của bạn', style: ACSTyphoghraphy.heading1),
+                        child: Text('Tên của bạn',
+                            style: ACSTyphoghraphy.heading1),
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(
@@ -411,7 +419,7 @@ class BookingScreen extends GetWidget<BookingController> {
                           ),
                         ),
                       ),
-                      footer(() { })
+                      footer(() {})
                     ],
                   ),
                 ),
@@ -456,34 +464,7 @@ class BookingScreen extends GetWidget<BookingController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16, bottom: 10),
-          child: Text('Chọn dịch vụ', style: ACSTyphoghraphy.heading1),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: ACSColors.primary, width: 1),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<Service>(
-              items: controller.listServices
-                  .map((e) => buildMenuItem1(e))
-                  .toList(),
-              icon: Image.asset('assets/icons/arrow-down.png'),
-              elevation: 0,
-              isExpanded: true,
-              value: controller.serviceSelected.value.id != null ? controller.serviceSelected.value : null,
-              onChanged: (value) {
-                if (value != null) {
-                  controller.serviceSelected.value = value;
-                }
-              },
-            ),
-          ),
-        ),
+        // Nhập số lượng máy
         const Padding(
           padding: EdgeInsets.only(left: 16, top: 16),
           child: Text('Nhập số lượng máy', style: ACSTyphoghraphy.heading1),
@@ -505,6 +486,7 @@ class BookingScreen extends GetWidget<BookingController> {
             ),
           ),
         ),
+        //Thời gian sửa chữa dự kiến
         const Padding(
           padding: EdgeInsets.only(left: 16, top: 16),
           child: Text('Thời gian sửa chữa dự kiến',
@@ -548,6 +530,59 @@ class BookingScreen extends GetWidget<BookingController> {
             ),
           ),
         ),
+        const SizedBox(height: 20),
+        // Thông tin máy bị như thế nào
+        const Padding(
+          padding: EdgeInsets.only(left: 16, bottom: 10),
+          child: Text('Ghi chú', style: ACSTyphoghraphy.heading1),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Form(
+            key: controller.descriptionFormKey,
+            child: TextFormField(
+              controller: controller.descriptionController,
+              validator: controller.validatorDescription,
+              minLines: 4,
+              maxLines: 6,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide:
+                      const BorderSide(color: ACSColors.primary, width: 1),
+                ),
+              ),
+            ),
+          ),
+        ),
+
+        // Container(
+        //   margin: const EdgeInsets.symmetric(horizontal: 16),
+        //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(8),
+        //     border: Border.all(color: ACSColors.primary, width: 1),
+        //   ),
+        //   child: DropdownButtonHideUnderline(
+        //     child: DropdownButton<Service>(
+        //       items: controller.listServices
+        //           .map((e) => buildMenuItem1(e))
+        //           .toList(),
+        //       icon: Image.asset('assets/icons/arrow-down.png'),
+        //       elevation: 0,
+        //       isExpanded: true,
+        //       value: controller.serviceSelected.value.id != null
+        //           ? controller.serviceSelected.value
+        //           : null,
+        //       onChanged: (value) {
+        //         if (value != null) {
+        //           controller.serviceSelected.value = value;
+        //         }
+        //       },
+        //     ),
+        //   ),
+        // ),
+
         footer(controller.nextFirstPage)
       ],
     );
@@ -563,23 +598,24 @@ class BookingScreen extends GetWidget<BookingController> {
         value: item,
       );
 
-  DropdownMenuItem<District> buildMenuItemDistrict(District item) => DropdownMenuItem(
-    child: Text(item.name ?? '', style: ACSTyphoghraphy.heading1),
-    value: item,
-  );
+  DropdownMenuItem<District> buildMenuItemDistrict(District item) =>
+      DropdownMenuItem(
+        child: Text(item.name ?? '', style: ACSTyphoghraphy.heading1),
+        value: item,
+      );
 
   DropdownMenuItem<Ward> buildMenuItemWard(Ward item) => DropdownMenuItem(
-    child: Text(item.name ?? '', style: ACSTyphoghraphy.heading1),
-    value: item,
-  );
+        child: Text(item.name ?? '', style: ACSTyphoghraphy.heading1),
+        value: item,
+      );
 
   DropdownMenuItem<String> buildMenuItem2(String item) => DropdownMenuItem(
-    child: Text(item, style: ACSTyphoghraphy.heading1),
-    value: item,
-  );
+        child: Text(item, style: ACSTyphoghraphy.heading1),
+        value: item,
+      );
 
   Widget footer(VoidCallback? functionNext) => Row(children: [
-        const Text("Trước")
+        const Text("Trước", style: ACSTyphoghraphy.buttonTitle)
             .box
             .withDecoration(BoxDecoration(
                 color: ACSColors.primary,
@@ -589,7 +625,7 @@ class BookingScreen extends GetWidget<BookingController> {
             .onTap(() {
           controller.backPage();
         }),
-        const Text("Sau")
+        const Text("Sau", style: ACSTyphoghraphy.buttonTitle)
             .box
             .withDecoration(BoxDecoration(
                 color: ACSColors.primary,
@@ -597,9 +633,10 @@ class BookingScreen extends GetWidget<BookingController> {
             .padding(const EdgeInsets.symmetric(vertical: 15, horizontal: 50))
             .make()
             .onTap(() {
-          if(functionNext != null) functionNext();
+          if (functionNext != null) functionNext();
         }),
-      ], mainAxisAlignment: MainAxisAlignment.spaceEvenly).marginSymmetric(vertical: 50);
+      ], mainAxisAlignment: MainAxisAlignment.spaceEvenly)
+          .marginSymmetric(vertical: 50);
 }
 
 class BookingData {

@@ -30,6 +30,9 @@ class BookingController extends GetxController {
   final amountController = TextEditingController();
   final amountFormKey = GlobalKey<FormState>();
 
+  final descriptionController = TextEditingController();
+  final descriptionFormKey = GlobalKey<FormState>();
+
   final addressController = TextEditingController();
   final addressFormKey = GlobalKey<FormState>();
 
@@ -47,43 +50,48 @@ class BookingController extends GetxController {
 
   String? validatorAmount(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Amount Not Empty!';
-    }
-    else{
+      return 'Hãy nhập số lượng máy !';
+    } else {
       var amount = int.tryParse(value);
-      if(amount == null || amount < 0 || amount > 100){
-        return 'Amount is invalidate !';
+      if (amount == null || amount < 0 || amount > 100) {
+        return 'Số lượng máy ít nhất là 1 và không quá 100 !';
       }
+    }
+    return null;
+  }
+
+  String? validatorDescription(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Hãy miêu tả sự cố của máy !';
+    } else if ((value.length < 10 && value.length > 1) || value.length > 200) {
+      return 'Ghi chú không thể ít hơn 10 và lớn hơn 200 ký tự !';
     }
     return null;
   }
 
   String? validatorAddress(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Address Not Empty!';
-    }
-    else if(value.length < 6 || value.length > 30){
-        return 'Address must > 6 and < 30 char !';
+      return 'Hãy nhập địa chỉ của bạn !';
+    } else if (value.length < 6 || value.length > 30) {
+      return 'Địa chỉ phải trên 6 kí tự và không lớn hơn 30 kí tự !';
     }
     return null;
   }
 
   String? validatorLastName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'LastName Not Empty!';
-    }
-    else if(value.length < 3 || value.length > 10){
-      return 'LastName must > 3 and < 10 char !';
+      return 'Hãy nhập tên của bạn !';
+    } else if (value.length < 3 || value.length > 10) {
+      return 'Tên của bạn không hợp lệ !';
     }
     return null;
   }
 
   String? validatorFirstName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'FirstName Not Empty!';
-    }
-    else if(value.length < 3 || value.length > 30){
-      return 'FirstName must > 3 and < 30 char !';
+      return 'Hãy nhập họ của bạn !';
+    } else if (value.length < 3 || value.length > 30) {
+      return 'Họ của bạn không hợp lệ !';
     }
     return null;
   }
@@ -92,99 +100,101 @@ class BookingController extends GetxController {
     String pattern = r'^(?:[+0]9)?[0-9]{10}$';
     RegExp regex = RegExp(pattern);
     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
-      return 'Phone number is invalidate !';
+      return 'Số điện thoại không hợp lệ !';
     }
     return null;
   }
 
   _getListService() async {
     showLoading();
-    await _serviceRepo.getService()
-        .then((value) => {
-      if (value != null)
-        listServices.value = value
-      else
-        showSnackBar(title: "Error", content: "Get service fail"),
-      hideLoading()
-    });
+    await _serviceRepo.getService().then((value) => {
+          if (value != null)
+            listServices.value = value
+          else
+            showSnackBar(title: "Lỗi", content: "Lấy dữ liệu không được"),
+          hideLoading()
+        });
   }
 
   _getListCity() async {
     showLoading();
-    await _serviceRepo.getCity()
-        .then((value) => {
-      if (value != null)
-        listCity.value = value
-      else
-        showSnackBar(title: "Error", content: "Get city fail"),
-      hideLoading()
-    });
+    await _serviceRepo.getCity().then((value) => {
+          if (value != null)
+            listCity.value = value
+          else
+            showSnackBar(
+                title: "Báo lỗi",
+                content: "Lấy dữ liệu tỉnh/thành phố từ hệ thống lỗi"),
+          hideLoading()
+        });
   }
 
   getListDistrict(int? cityId) async {
-    if(cityId != null){
+    if (cityId != null) {
       showLoading();
-      await _serviceRepo.getDistrictByCity(cityId: cityId)
-          .then((value) => {
-        if (value != null)
-          listDistrict.value = value
-        else
-          showSnackBar(title: "Error", content: "Get district fail"),
-        hideLoading()
-      });
+      await _serviceRepo.getDistrictByCity(cityId: cityId).then((value) => {
+            if (value != null)
+              listDistrict.value = value
+            else
+              showSnackBar(
+                  title: "Báo lỗi",
+                  content: "Lấy dữ liệu quận/huyện từ hệ thống lỗi"),
+            hideLoading()
+          });
     }
   }
 
   getListWard(int? districtId) async {
-    if(districtId != null){
+    if (districtId != null) {
       showLoading();
-      await _serviceRepo.getWardByDistrict(districtId: districtId)
+      await _serviceRepo
+          .getWardByDistrict(districtId: districtId)
           .then((value) => {
-        if (value != null)
-          listWard.value = value
-        else
-          showSnackBar(title: "Error", content: "Get ward fail"),
-        hideLoading()
-      });
+                if (value != null)
+                  listWard.value = value
+                else
+                  showSnackBar(
+                      title: "Báo lỗi",
+                      content: "Lấy dữ liệu phường/xã từ hệ thống lỗi"),
+                hideLoading()
+              });
     }
   }
 
-  nextFirstPage(){
-    if(serviceSelected.value.id != null){
-      if(amountFormKey.currentState?.validate() == true ) {
-        introKey.currentState?.controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+  nextFirstPage() {
+    if (serviceSelected.value.id != null) {
+      if (amountFormKey.currentState?.validate() == true) {
+        introKey.currentState?.controller.nextPage(
+            duration: const Duration(milliseconds: 500), curve: Curves.ease);
       }
-    }
-    else{
-      showSnackBar(title: "Warning", content: "Please Choose Service");
+    } else {
+      showSnackBar(title: "Cảnh báo", content: "Hãy chọn loại dịch vụ");
     }
   }
 
-  nextSecondPage(){
-    if(addressFormKey.currentState?.validate() == true){
-      if(citySelected.value.id == null){
-        showSnackBar(title: "Warning", content: "Please Choose City");
-      }
-      else if(districtSelected.value.id == null){
-        showSnackBar(title: "Warning", content: "Please Choose district");
-      }
-      else if(wardSelected.value.id == null){
-        showSnackBar(title: "Warning", content: "Please Choose ward");
-      }
-      else{
-        introKey.currentState?.controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+  nextSecondPage() {
+    if (addressFormKey.currentState?.validate() == true) {
+      if (citySelected.value.id == null) {
+        showSnackBar(title: "Cảnh báo", content: "Hãy chọn thành phố/tỉnh");
+      } else if (districtSelected.value.id == null) {
+        showSnackBar(title: "Cảnh báo", content: "Hãy chọn quận/huyện");
+      } else if (wardSelected.value.id == null) {
+        showSnackBar(title: "Cảnh báo", content: "Hãy chọn phường/xã");
+      } else {
+        introKey.currentState?.controller.nextPage(
+            duration: const Duration(milliseconds: 500), curve: Curves.ease);
       }
     }
   }
 
   donePage() {
-    if(infoUserFormKey.currentState?.validate() == true){
+    if (infoUserFormKey.currentState?.validate() == true) {
       goTo(screen: ROUTER_CONFIRM_BOOKING);
     }
   }
 
-  backPage(){
-    introKey.currentState?.controller.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+  backPage() {
+    introKey.currentState?.controller.previousPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
-
 }
