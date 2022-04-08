@@ -1,5 +1,8 @@
 
+import 'dart:ffi';
+
 import 'package:acs_1/repository/apis/service.api.dart';
+import 'package:acs_1/repository/models/appointment.dart';
 import 'package:acs_1/repository/models/distric.dart';
 import 'package:acs_1/repository/models/ward.dart';
 
@@ -29,5 +32,10 @@ class ServiceRepo {
   Future<List<Ward>?> getWardByDistrict({required int districtId}) async {
     var res = await serviceApi.getWardByDistrict(districtId: districtId);
     return res?.success == true ? List.from(res?.data).map((e)=> Ward.fromJson(e)).toList() : null;
+  }
+
+  Future<bool> createAppointment({required Appointment appointment}) async {
+    var res = await serviceApi.createAppointment(appointment.toHeaders());
+    return res?.success ?? false;
   }
 }

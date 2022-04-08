@@ -20,5 +20,9 @@ class ServiceApi extends BaseConnect {
   Future<BaseResponse?> getWardByDistrict({required int districtId}) async {
     return await getResponse('/ward/$districtId');
   }
+
+  Future<BaseResponse?> createAppointment(Map<String, dynamic> map) async {
+    return await postRequest('/appointment/createAppointment', query: map);
+  }
 }
 

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../repository/models/appointment.dart';
 
-class AppointmentDetail extends StatefulWidget {
+/*class AppointmentDetail extends StatefulWidget {
   final Appointment appointment;
 
   const AppointmentDetail({
@@ -216,4 +216,4 @@ class _AppointmentDetailState extends State<AppointmentDetail> {
     }
     return () {};
   }
-}
+}*/

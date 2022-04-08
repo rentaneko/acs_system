@@ -1,14 +1,17 @@
 import 'package:acs_1/@share/router/pages.dart';
+import 'package:acs_1/repository/models/appointment.dart';
 import 'package:acs_1/repository/models/distric.dart';
 import 'package:acs_1/repository/models/ward.dart';
 import 'package:acs_1/repository/repo/service.repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../../@share/utils/util.dart';
 import '../../repository/models/city.dart';
 import '../../repository/models/service.dart';
+import '../../repository/storage/data.storage.dart';
 
 class BookingController extends GetxController {
   var listServices = <Service>[].obs;
@@ -28,10 +31,9 @@ class BookingController extends GetxController {
   final _serviceRepo = Get.find<ServiceRepo>();
 
   final amountController = TextEditingController();
-  final amountFormKey = GlobalKey<FormState>();
+  final firstPageFormKey = GlobalKey<FormState>();
 
   final descriptionController = TextEditingController();
-  final descriptionFormKey = GlobalKey<FormState>();
 
   final addressController = TextEditingController();
   final addressFormKey = GlobalKey<FormState>();
@@ -40,6 +42,8 @@ class BookingController extends GetxController {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final phoneController = TextEditingController();
+
+  final _dataStorage  = Get.find<DataStorage>();
 
   @override
   void onReady() {
@@ -162,13 +166,9 @@ class BookingController extends GetxController {
   }
 
   nextFirstPage() {
-    if (serviceSelected.value.id != null) {
-      if (amountFormKey.currentState?.validate() == true) {
-        introKey.currentState?.controller.nextPage(
-            duration: const Duration(milliseconds: 500), curve: Curves.ease);
-      }
-    } else {
-      showSnackBar(title: "Cảnh báo", content: "Hãy chọn loại dịch vụ");
+    if (firstPageFormKey.currentState?.validate() == true) {
+      introKey.currentState?.controller.nextPage(
+          duration: const Duration(milliseconds: 500), curve: Curves.ease);
     }
   }
 
@@ -189,7 +189,17 @@ class BookingController extends GetxController {
 
   donePage() {
     if (infoUserFormKey.currentState?.validate() == true) {
-      goTo(screen: ROUTER_CONFIRM_BOOKING);
+      var appointment = Appointment(
+          customerId: 5,
+          wardId: wardSelected.value.id,
+          fullName: lastNameController.text + firstNameController.text,
+          description: descriptionController.text,
+          phone: phoneController.text,
+          address: addressController.text,
+          date: DateFormat.yMd().format(DateTime.now()),
+          time: '8',
+          quantity: int.tryParse(amountController.text));
+      goTo(screen: ROUTER_CONFIRM_BOOKING, argument: appointment);
     }
   }
 

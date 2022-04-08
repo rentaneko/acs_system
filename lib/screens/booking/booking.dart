@@ -389,7 +389,7 @@ class BookingScreen extends GetWidget<BookingController> {
                             horizontal: 16, vertical: 16),
                         child: TextFormField(
                           validator: controller.validatorFirstName,
-                          controller: controller.lastNameController,
+                          controller: controller.firstNameController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -419,7 +419,7 @@ class BookingScreen extends GetWidget<BookingController> {
                           ),
                         ),
                       ),
-                      footer(() {})
+                      footer(controller.donePage)
                     ],
                   ),
                 ),
@@ -460,19 +460,19 @@ class BookingScreen extends GetWidget<BookingController> {
   }
 
   Widget _bookingFirst() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        // Nhập số lượng máy
-        const Padding(
-          padding: EdgeInsets.only(left: 16, top: 16),
-          child: Text('Nhập số lượng máy', style: ACSTyphoghraphy.heading1),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Form(
-            key: controller.amountFormKey,
+    return Form(
+      key: controller.firstPageFormKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          // Nhập số lượng máy
+          const Padding(
+            padding: EdgeInsets.only(left: 16, top: 16),
+            child: Text('Nhập số lượng máy', style: ACSTyphoghraphy.heading1),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: TextFormField(
               controller: controller.amountController,
               validator: controller.validatorAmount,
@@ -485,61 +485,58 @@ class BookingScreen extends GetWidget<BookingController> {
               ),
             ),
           ),
-        ),
-        //Thời gian sửa chữa dự kiến
-        const Padding(
-          padding: EdgeInsets.only(left: 16, top: 16),
-          child: Text('Thời gian sửa chữa dự kiến',
-              style: ACSTyphoghraphy.heading1),
-        ),
-        const SizedBox(height: 20),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: ACSColors.primary, width: 1),
+          //Thời gian sửa chữa dự kiến
+          const Padding(
+            padding: EdgeInsets.only(left: 16, top: 16),
+            child: Text('Thời gian sửa chữa dự kiến',
+                style: ACSTyphoghraphy.heading1),
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              items: BookingData.days.map(buildMenuItem2).toList(),
-              icon: Image.asset('assets/icons/arrow-down.png'),
-              elevation: 0,
-              isExpanded: true,
-              onChanged: (value) {},
-              value: BookingData.days[0],
+          const SizedBox(height: 20),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: ACSColors.primary, width: 1),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                items: BookingData.days.map(buildMenuItem2).toList(),
+                icon: Image.asset('assets/icons/arrow-down.png'),
+                elevation: 0,
+                isExpanded: true,
+                onChanged: (value) {},
+                value: BookingData.days[0],
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: ACSColors.primary, width: 1),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              items: BookingData.times.map(buildMenuItem2).toList(),
-              icon: Image.asset('assets/icons/arrow-down.png'),
-              elevation: 0,
-              isExpanded: true,
-              onChanged: (value) {},
-              value: BookingData.times[0],
+          const SizedBox(height: 16),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: ACSColors.primary, width: 1),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                items: BookingData.times.map(buildMenuItem2).toList(),
+                icon: Image.asset('assets/icons/arrow-down.png'),
+                elevation: 0,
+                isExpanded: true,
+                onChanged: (value) {},
+                value: BookingData.times[0],
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 20),
-        // Thông tin máy bị như thế nào
-        const Padding(
-          padding: EdgeInsets.only(left: 16, bottom: 10),
-          child: Text('Ghi chú', style: ACSTyphoghraphy.heading1),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Form(
-            key: controller.descriptionFormKey,
+          const SizedBox(height: 20),
+          // Thông tin máy bị như thế nào
+          const Padding(
+            padding: EdgeInsets.only(left: 16, bottom: 10),
+            child: Text('Ghi chú', style: ACSTyphoghraphy.heading1),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: TextFormField(
               controller: controller.descriptionController,
               validator: controller.validatorDescription,
@@ -554,37 +551,37 @@ class BookingScreen extends GetWidget<BookingController> {
               ),
             ),
           ),
-        ),
 
-        // Container(
-        //   margin: const EdgeInsets.symmetric(horizontal: 16),
-        //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(8),
-        //     border: Border.all(color: ACSColors.primary, width: 1),
-        //   ),
-        //   child: DropdownButtonHideUnderline(
-        //     child: DropdownButton<Service>(
-        //       items: controller.listServices
-        //           .map((e) => buildMenuItem1(e))
-        //           .toList(),
-        //       icon: Image.asset('assets/icons/arrow-down.png'),
-        //       elevation: 0,
-        //       isExpanded: true,
-        //       value: controller.serviceSelected.value.id != null
-        //           ? controller.serviceSelected.value
-        //           : null,
-        //       onChanged: (value) {
-        //         if (value != null) {
-        //           controller.serviceSelected.value = value;
-        //         }
-        //       },
-        //     ),
-        //   ),
-        // ),
+          // Container(
+          //   margin: const EdgeInsets.symmetric(horizontal: 16),
+          //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(8),
+          //     border: Border.all(color: ACSColors.primary, width: 1),
+          //   ),
+          //   child: DropdownButtonHideUnderline(
+          //     child: DropdownButton<Service>(
+          //       items: controller.listServices
+          //           .map((e) => buildMenuItem1(e))
+          //           .toList(),
+          //       icon: Image.asset('assets/icons/arrow-down.png'),
+          //       elevation: 0,
+          //       isExpanded: true,
+          //       value: controller.serviceSelected.value.id != null
+          //           ? controller.serviceSelected.value
+          //           : null,
+          //       onChanged: (value) {
+          //         if (value != null) {
+          //           controller.serviceSelected.value = value;
+          //         }
+          //       },
+          //     ),
+          //   ),
+          // ),
 
-        footer(controller.nextFirstPage)
-      ],
+          footer(controller.nextFirstPage)
+        ],
+      ),
     );
   }
 

@@ -73,7 +73,7 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
               case 'Home':
                 return const HomeScreen();
               case 'Appointment':
-                return const AppointmentScreen();
+                return AppointmentScreen();
               case 'History':
                 return HistoryScreen();
               case 'Profile':

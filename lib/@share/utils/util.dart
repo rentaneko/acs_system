@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 
 widthScreen({int? percent}) =>
@@ -31,3 +32,11 @@ showLoading([String? content]) => EasyLoading.show(
 hideLoading() => EasyLoading.dismiss();
 
 showSnackBar({required String title, required String content }) => Get.snackbar(title, content);
+
+String formatDateTime(String date){
+  var dateT = DateTime.tryParse(date);
+  if(dateT != null){
+    return DateFormat.yMd().format(dateT);
+  }
+  return '';
+}

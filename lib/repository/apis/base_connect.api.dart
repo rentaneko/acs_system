@@ -21,7 +21,6 @@ class BaseConnect extends GetConnect {
         if (token != null) request.headers[AUTHORIZATION] = "$BEARER $token";
 
         Get.log('[HEADER] : ${request.headers.toString()}');
-
         return request;
       });
   }
@@ -41,10 +40,10 @@ class BaseConnect extends GetConnect {
     }
   }
 
-  Future<BaseResponse?> postRequest(String url, {dynamic body, dynamic query}) async {
+  Future<BaseResponse?> postRequest(String url, {dynamic body, dynamic query, headers}) async {
     Get.log('[BODY] : ${body.toString()}');
     var response =
-    await post(url, body, decoder: (map) => BaseResponse.fromMap(map), query: query);
+    await post(url, body, decoder: (map) => BaseResponse.fromMap(map), query: query, headers: headers);
     if (response.isOk) {
       Get.log('[RESPONSE] : ${response.body?.toMap()}');
       return response.body;
