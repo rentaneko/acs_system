@@ -4,3 +4,4 @@ const ROUTER_LOGIN = '/loginScreen';
 const ROUTER_REGISTER = '/registerScreen';
 const ROUTER_BOOKING = '/bookingScreen';
 const ROUTER_CONFIRM_BOOKING = '/confirmBookingScreen';
+const ROUTER_NAVBAR = '/NavBarScreen';

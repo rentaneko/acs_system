@@ -1,3 +1,4 @@
+import 'package:acs_1/@share/router/pages.dart';
 import 'package:acs_1/repository/models/Profile.dart';
 import 'package:acs_1/repository/storage/data.storage.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class LoginController extends GetxController {
   @override
   void onReady() {
     if(_dataStorage.getToken() != null){
-      Get.to(() => const BuildBottomNavBar());
+      goToAndRemoveAll(screen: ROUTER_NAVBAR);
     }
     super.onReady();
   }

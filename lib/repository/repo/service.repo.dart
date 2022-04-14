@@ -38,4 +38,10 @@ class ServiceRepo {
     var res = await serviceApi.createAppointment(appointment.toQuery());
     return res?.success ?? false;
   }
+
+  Future<List<Appointment>?> getAppointmentByCusId({required int customer}) async {
+    var res = await serviceApi.getAppointmentByCusId(customer: customer);
+    return res?.success == true ? List.from(res?.data).map((e)=> Appointment.fromJson(e)).toList() : null;
+  }
+
 }
