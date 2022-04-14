@@ -1,4 +1,5 @@
 import 'package:acs_1/@share/router/pages.dart';
+import 'package:acs_1/repository/models/Profile.dart';
 import 'package:acs_1/repository/models/appointment.dart';
 import 'package:acs_1/repository/models/distric.dart';
 import 'package:acs_1/repository/models/ward.dart';
@@ -189,8 +190,9 @@ class BookingController extends GetxController {
 
   donePage() {
     if (infoUserFormKey.currentState?.validate() == true) {
+      Profile profile = Profile.fromJson(_dataStorage.getToken());
       var appointment = Appointment(
-          customerId: 5,
+          customerId: profile.id,
           wardId: wardSelected.value.id,
           fullName: lastNameController.text + firstNameController.text,
           description: descriptionController.text,

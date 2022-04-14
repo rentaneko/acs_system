@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../@share/utils/util.dart';
 import '../../repository/repo/service.repo.dart';
+import '../build_nav_bar.dart';
 
 class ConfirmBookingController extends GetxController {
   var appointment = Appointment().obs;
@@ -25,6 +26,7 @@ class ConfirmBookingController extends GetxController {
         showSnackBar(
             title: "Thông báo",
             content: "Booking thành công"),
+        Get.offAll(() => const BuildBottomNavBar())
       }
       else
         showSnackBar(

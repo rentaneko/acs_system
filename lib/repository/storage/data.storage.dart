@@ -15,7 +15,7 @@ class DataStorage {
 
   getLogin() => _storage?.read(_login);
 
-  setToken(Profile value) async => await _storage?.write(_token, value);
+  setToken(String value) async => await _storage?.write(_token, value);
 
   getToken() => _storage?.read(_token);
 }
