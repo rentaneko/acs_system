@@ -70,7 +70,7 @@ class Appointment {
     return _data;
   }
 
-  Map<String, String> toHeaders() {
+  Map<String, String> toQuery() {
     final _data = <String, String>{};
     _data['customer_id'] = customerId.toString();
     _data['ward_id'] = wardId.toString();

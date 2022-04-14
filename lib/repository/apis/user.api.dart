@@ -10,7 +10,7 @@ class UserApi extends BaseConnect {
   }
 
   Future<BaseResponse?> register(Map<String, dynamic> map) async {
-    return await postRequest('/user/customer', headers: map);
+    return await postRequest('/user/customer', query: map);
   }
 
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '@share/router/pages.dart';
 import '@share/router/router.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       builder: (_, child) => FlutterEasyLoading(child: child),
-      initialRoute: ROUTER_BOOKING,
+      initialRoute: ROUTER_LOGIN,
       getPages: Routers.route,
       debugShowCheckedModeBanner: false,
     );

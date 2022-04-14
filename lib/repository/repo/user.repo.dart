@@ -1,4 +1,6 @@
 
+import 'package:acs_1/repository/models/Profile.dart';
+
 import '../apis/user.api.dart';
 
 class UserRepo {
@@ -6,13 +8,13 @@ class UserRepo {
 
   UserRepo(this.userApi);
 
-  Future<int?> login({required String username, required String password}) async {
+  Future<Profile?> login({required String username, required String password}) async {
     var res = await userApi.login({'username': username, 'password': password});
-    return res?.success == true ? res?.data : null;
+    return res?.success == true ? Profile.fromJson(res?.data) : null;
   }
 
-  Future<dynamic> register({required String phone, required String username, required String password, required String email}) async {
-    var res = await userApi.register({'username': username, 'password': password, 'phone': phone, 'email': email});
-    return res?.success == true ? res?.data : null;
+  Future<bool> register({required Profile profile}) async {
+    var res = await userApi.register(profile.toQuery());
+    return res?.success ?? false;
   }
 }

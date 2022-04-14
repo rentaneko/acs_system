@@ -35,7 +35,7 @@ class ServiceRepo {
   }
 
   Future<bool> createAppointment({required Appointment appointment}) async {
-    var res = await serviceApi.createAppointment(appointment.toHeaders());
+    var res = await serviceApi.createAppointment(appointment.toQuery());
     return res?.success ?? false;
   }
 }

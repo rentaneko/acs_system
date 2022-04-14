@@ -1,3 +1,4 @@
+import 'package:acs_1/repository/models/Profile.dart';
 import 'package:acs_1/repository/storage/data.storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,10 +42,9 @@ class LoginController extends GetxController {
     }
   }
 
-  handlerLogin(int? value) {
+  handlerLogin(Profile? value) {
     if (value != null) {
       _dataStorage.setToken(value);
-      _dataStorage.getToken();
       Get.to(() => const BuildBottomNavBar());
     } else {
       showSnackBar(title: "Error", content: "Login fail");

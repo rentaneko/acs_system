@@ -1,5 +1,6 @@
 import 'package:acs_1/@share/router/pages.dart';
 import 'package:acs_1/@share/utils/util.dart';
+import 'package:acs_1/repository/models/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class RegisterController extends GetxController {
   final passwordController = TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
   final accountNameController = TextEditingController();
+
   String? validatorPhone(String? value) {
     String pattern = r'^(?:[+0]9)?[0-9]{10}$';
     RegExp regex = RegExp(pattern);
@@ -64,16 +66,22 @@ class RegisterController extends GetxController {
 
   Future<void> register() async {
     if (registerFormKey.currentState?.validate() == true) {
-      var res = await _userRepo.register(
-          username: userNameController.text,
-          password: passwordController.text,
+      showLoading();
+      var profile = Profile(
+          fullName: userNameController.text,
+          email: emailController.text,
+          address: "HCM - Tan Binh",
           phone: phoneNumberController.text,
-          email: emailController.text);
-      if (res != null) {
-        goToAndRemoveAll(screen: ROUTER_REGISTER);
+          username: accountNameController.text,
+          password: passwordController.text);
+      var res = await _userRepo.register(profile: profile);
+      if (res) {
+        goToAndRemoveAll(screen: ROUTER_LOGIN);
+        showSnackBar(title: "", content: "Đăng kí thành công");
       } else {
         showSnackBar(title: "Error", content: "Register fail");
       }
+      hideLoading();
     }
   }
 
