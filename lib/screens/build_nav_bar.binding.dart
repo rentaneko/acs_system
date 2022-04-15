@@ -12,7 +12,7 @@ class NavBarBinding extends Bindings {
     Get.lazyPut(() => DataStorage());
     Get.lazyPut(() => ServiceApi());
     Get.put(ServiceRepo(Get.find()));
+    Get.lazyPut(() => NavBarController());
     Get.put(AppointmentController());
-    Get.put(NavBarController());
   }
 }

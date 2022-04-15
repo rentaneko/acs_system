@@ -190,18 +190,25 @@ class BookingController extends GetxController {
 
   donePage() {
     if (infoUserFormKey.currentState?.validate() == true) {
-      Profile profile = Profile.fromJson(_dataStorage.getToken());
-      var appointment = Appointment(
-          customerId: profile.id,
-          wardId: wardSelected.value.id,
-          fullName: lastNameController.text + firstNameController.text,
-          description: descriptionController.text,
-          phone: phoneController.text,
-          address: addressController.text,
-          date: DateFormat.yMd().format(DateTime.now()),
-          time: '8',
-          quantity: int.tryParse(amountController.text));
-      goTo(screen: ROUTER_CONFIRM_BOOKING, argument: appointment);
+      int? id = _dataStorage.getToken();
+      if (id != null) {
+        var appointment = Appointment(
+            customerId: id,
+            wardId: wardSelected.value.id,
+            fullName: lastNameController.text + firstNameController.text,
+            description: descriptionController.text,
+            phone: phoneController.text,
+            address: addressController.text,
+            date: DateFormat.yMd().format(DateTime.now()),
+            time: '8',
+            quantity: int.tryParse(amountController.text));
+        goTo(screen: ROUTER_CONFIRM_BOOKING, argument: appointment);
+      }
+      else {
+        showSnackBar(
+            title: "Báo lỗi",
+            content: "User id null");
+      }
     }
   }
 

@@ -45,8 +45,8 @@ class LoginController extends GetxController {
 
   handlerLogin(Profile? value) {
     if (value != null) {
-      _dataStorage.setToken(value.toJson().toString());
-      Get.to(() => const BuildBottomNavBar());
+      _dataStorage.setToken(value.id);
+      goTo(screen: ROUTER_NAVBAR);
     } else {
       showSnackBar(title: "Error", content: "Login fail");
     }

@@ -17,6 +17,11 @@ class NavBarController extends GetxController {
     ProfileScreen()
   ];
 
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
   selectIndex(int index) => _selectedIndex.value = index;
 
   getScreen() => _screenList[_selectedIndex.value];

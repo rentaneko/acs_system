@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pandabar/main.view.dart';
 import 'package:pandabar/model.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class BuildBottomNavBar extends GetWidget<NavBarController> {
   const BuildBottomNavBar({Key? key}) : super(key: key);

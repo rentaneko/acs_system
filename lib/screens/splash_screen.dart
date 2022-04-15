@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.to(() => const BuildBottomNavBar());
+        //Get.to(() => const BuildBottomNavBar());
       },
     );
     super.initState();

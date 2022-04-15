@@ -23,11 +23,11 @@ class AppointmentController extends GetxController {
   }
 
   getAppointmentByCusId() async {
-    Profile profile = Profile.fromJson(_dataStorage.getToken());
-    if (profile.id != null) {
+    int? id = _dataStorage.getToken();
+    if (id != null) {
       showLoading();
       await _serviceRepo
-          .getAppointmentByCusId(customer: profile.id ?? 0)
+          .getAppointmentByCusId(customer: id ?? 0)
           .then((value) => {
                 if (value != null)
                   listAppointment.value = value
