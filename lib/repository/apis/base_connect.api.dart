@@ -17,8 +17,8 @@ class BaseConnect extends GetConnect {
       ..timeout = const Duration(seconds: MAX_TIME_OUT)
       ..defaultContentType = CONTENT_TYPE
       ..addAuthenticator<dynamic>((request) {
-        var token = Get.find<DataStorage>().getToken();
-        if (token != null) request.headers[AUTHORIZATION] = "$BEARER $token";
+/*        var token = Get.find<DataStorage>().getToken();
+        if (token != null) request.headers[AUTHORIZATION] = "$BEARER $token";*/
 
         Get.log('[HEADER] : ${request.headers.toString()}');
         return request;

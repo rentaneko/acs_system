@@ -21,7 +21,7 @@ class NavBarController extends GetxController {
     ProfileScreen()
   ];
 
-  Profile? prof = Profile.fromJson(Get.find<DataStorage>().getToken());
+  Profile? prof = Get.find<DataStorage>().getToken();
 
   @override
   void onReady() {

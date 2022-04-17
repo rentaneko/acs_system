@@ -191,11 +191,10 @@ class BookingController extends GetxController {
 
   donePage() {
     if (infoUserFormKey.currentState?.validate() == true) {
-      var profile = _dataStorage.getToken();
+      Profile? profile = _dataStorage.getToken();
       if (profile != null) {
-        Profile prof = Profile.fromJson(profile);
         var appointment = Appointment(
-            customerId: prof.id,
+            customerId: profile.id,
             wardId: wardSelected.value.id,
             fullName: lastNameController.text + firstNameController.text,
             description: descriptionController.text,

@@ -17,5 +17,16 @@ class DataStorage {
 
   setToken(Profile? value) async => await _storage?.write(_token, value);
 
-  getToken() => _storage?.read(_token);
+  getToken() {
+    var profile = _storage?.read(_token);
+    if(profile != null){
+      if(profile.runtimeType == Profile){
+        return profile;
+      }
+      else {
+        return Profile.fromJson(profile);
+      }
+    }
+    return null;
+  }
 }
