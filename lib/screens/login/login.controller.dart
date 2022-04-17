@@ -16,7 +16,8 @@ class LoginController extends GetxController {
 
   @override
   void onReady() {
-    if(_dataStorage.getToken() != null){
+    var profile = _dataStorage.getToken();
+    if(profile != null){
       goToAndRemoveAll(screen: ROUTER_NAVBAR);
     }
     super.onReady();
@@ -45,7 +46,7 @@ class LoginController extends GetxController {
 
   handlerLogin(Profile? value) {
     if (value != null) {
-      _dataStorage.setToken(value.id);
+      _dataStorage.setToken(value);
       goTo(screen: ROUTER_NAVBAR);
     } else {
       showSnackBar(title: "Error", content: "Login fail");

@@ -55,4 +55,20 @@ class BaseConnect extends GetConnect {
           code: response.status.code);
     }
   }
+
+  Future<BaseResponse?> pathRequest(String url, {dynamic body, dynamic query, headers}) async {
+    Get.log('[BODY] : ${body.toString()}');
+    var response =
+    await patch(url, body, decoder: (map) => BaseResponse.fromMap(map), query: query, headers: headers);
+    if (response.isOk) {
+      Get.log('[RESPONSE] : ${response.body?.toMap()}');
+      return response.body;
+    } else {
+      hideLoading();
+      return BaseResponse(
+          success: false,
+          message: response.statusText,
+          code: response.status.code);
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:acs_1/@share/constants/value.constant.dart';
 import 'package:acs_1/@share/router/pages.dart';
 import 'package:acs_1/repository/models/Profile.dart';
 import 'package:acs_1/repository/models/appointment.dart';
@@ -190,16 +191,17 @@ class BookingController extends GetxController {
 
   donePage() {
     if (infoUserFormKey.currentState?.validate() == true) {
-      int? id = _dataStorage.getToken();
-      if (id != null) {
+      var profile = _dataStorage.getToken();
+      if (profile != null) {
+        Profile prof = Profile.fromJson(profile);
         var appointment = Appointment(
-            customerId: id,
+            customerId: prof.id,
             wardId: wardSelected.value.id,
             fullName: lastNameController.text + firstNameController.text,
             description: descriptionController.text,
             phone: phoneController.text,
             address: addressController.text,
-            date: DateFormat.yMd().format(DateTime.now()),
+            date: DateFormat(FORMAT_DAY).format(DateTime.now()),
             time: '8',
             quantity: int.tryParse(amountController.text));
         goTo(screen: ROUTER_CONFIRM_BOOKING, argument: appointment);

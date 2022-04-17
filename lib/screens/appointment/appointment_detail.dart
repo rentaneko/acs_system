@@ -218,6 +218,8 @@ class AppointmentDetail extends GetWidget<AppointmentController> {
     } else if (status == 2) {
       return null;
     }
-    return () {};
+    return () {
+      controller.cancelAppointment(controller.appointment.value.id);
+    };
   }
 }

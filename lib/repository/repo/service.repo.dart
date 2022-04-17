@@ -44,4 +44,9 @@ class ServiceRepo {
     return res?.success == true ? List.from(res?.data).map((e)=> Appointment.fromJson(e)).toList() : null;
   }
 
+  Future<bool> cancelAppointment({required int id}) async {
+    var res = await serviceApi.cancelAppointment(id: id);
+    return res?.success ?? false;
+  }
+
 }

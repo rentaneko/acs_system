@@ -29,5 +29,9 @@ class ServiceApi extends BaseConnect {
     return await getResponse('/appointment/$customer/customer');
   }
 
+  Future<BaseResponse?> cancelAppointment({required int id}) async {
+    return await pathRequest('/appointment/cancel/$id');
+  }
+
 }
 

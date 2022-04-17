@@ -1,3 +1,4 @@
+import 'package:acs_1/@share/router/pages.dart';
 import 'package:acs_1/repository/models/appointment.dart';
 import 'package:get/get.dart';
 
@@ -23,11 +24,12 @@ class AppointmentController extends GetxController {
   }
 
   getAppointmentByCusId() async {
-    int? id = _dataStorage.getToken();
-    if (id != null) {
+    var profile = _dataStorage.getToken();
+    if (profile != null) {
       showLoading();
+      Profile prof = Profile.fromJson(profile);
       await _serviceRepo
-          .getAppointmentByCusId(customer: id ?? 0)
+          .getAppointmentByCusId(customer: prof.id ?? 0)
           .then((value) => {
                 if (value != null)
                   listAppointment.value = value
@@ -36,6 +38,24 @@ class AppointmentController extends GetxController {
                       title: "Báo lỗi", content: "getAppointmentByCusId Lỗi"),
                 hideLoading()
               });
+    }
+  }
+
+  cancelAppointment(int? id) async {
+    if(id != null){
+      showLoading();
+      await _serviceRepo.cancelAppointment(id: id)
+          .then((value) => {
+        if (value) {
+          showSnackBar(
+              title: "Thông báo", content: "Hủy đơn thành công"),
+          goToAndRemoveAll(screen: ROUTER_NAVBAR)
+        }
+        else
+          showSnackBar(
+              title: "Báo lỗi", content: "cancelAppointment Lỗi"),
+        hideLoading()
+      });
     }
   }
 }
