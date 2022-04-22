@@ -176,7 +176,9 @@ class BookingScreen extends GetWidget<BookingController> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.nextFirstPage();
+                    },
                     child: const Text('Xác nhận đặt lịch',
                         style: ACSTyphoghraphy.buttonTitle),
                     style: ElevatedButton.styleFrom(
