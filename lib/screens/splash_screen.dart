@@ -12,14 +12,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final controller = Get.find<BasicController>();
 
   @override
   void initState() {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.to(() => const BuildBottomNavBar());
+        //Get.to(() => const BuildBottomNavBar());
       },
     );
     super.initState();

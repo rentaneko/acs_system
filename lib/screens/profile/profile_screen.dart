@@ -1,10 +1,11 @@
-import 'package:acs_1/screens/login/login.dart';
+import 'package:acs_1/screens/build_nav_bar.controller.dart';
+import 'package:acs_1/screens/login/login.screen.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetWidget<NavBarController> {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -41,11 +42,11 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Text('Lưu Phương Uyên',
+                    children: [
+                      Text(controller.prof?.fullName ?? '',
                           style: ACSTyphoghraphy.profileTitle),
-                      Text('0378285566', style: ACSTyphoghraphy.profileTitle),
-                      Text('Thợ máy', style: ACSTyphoghraphy.profileTitle),
+                      Text(controller.prof?.phone ?? '', style: ACSTyphoghraphy.profileTitle),
+                      Text(controller.prof?.email ?? '', style: ACSTyphoghraphy.profileTitle),
                     ],
                   ),
                 ),
@@ -90,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                 title: Text('Đăng xuất tài khoản',
                     style: ACSTyphoghraphy.listTitle
                         .copyWith(color: const Color.fromRGBO(198, 33, 53, 1))),
-                onTap: () {},
+                onTap: () => controller.signOut(),
               ),
             ],
           ),

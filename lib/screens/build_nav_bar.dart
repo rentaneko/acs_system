@@ -1,6 +1,9 @@
+import 'package:acs_1/@share/router/pages.dart';
+import 'package:acs_1/@share/utils/util.dart';
 import 'package:acs_1/controller/basic_controller.dart';
 import 'package:acs_1/screens/booking/booking.dart';
 import 'package:acs_1/screens/appointment/appointment.dart';
+import 'package:acs_1/screens/build_nav_bar.controller.dart';
 import 'package:acs_1/screens/history/history.dart';
 import 'package:acs_1/screens/homepage/homepage.dart';
 import 'package:acs_1/screens/profile/profile_screen.dart';
@@ -10,17 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pandabar/main.view.dart';
 import 'package:pandabar/model.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
-class BuildBottomNavBar extends StatefulWidget {
+class BuildBottomNavBar extends GetWidget<NavBarController> {
   const BuildBottomNavBar({Key? key}) : super(key: key);
-
-  @override
-  State<BuildBottomNavBar> createState() => _BuildBottomNavBarState();
-}
-
-class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
-  String page = 'Home';
 
   @override
   Widget build(BuildContext context) {
@@ -39,48 +34,32 @@ class _BuildBottomNavBarState extends State<BuildBottomNavBar> {
             ],
             buttonData: [
               PandaBarButtonData(
-                id: 'Home',
+                id: 0,
                 icon: Icons.home,
                 title: 'Home',
               ),
               PandaBarButtonData(
-                id: 'Appointment',
+                id: 1,
                 icon: CupertinoIcons.doc_text,
                 title: 'Appointment',
               ),
               PandaBarButtonData(
-                id: 'History',
+                id: 2,
                 icon: Icons.receipt_outlined,
                 title: 'History',
               ),
               PandaBarButtonData(
-                id: 'Profile',
+                id: 3,
                 icon: Icons.person,
                 title: 'Profile',
               ),
             ],
             onChange: (id) {
-              setState(() => page = id);
+              controller.selectIndex(id);
             },
-            onFabButtonPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BookingScreen())),
+            onFabButtonPressed: () => goTo(screen: ROUTER_BOOKING),
           ),
         ),
-        body: Builder(
-          builder: (context) {
-            switch (page) {
-              case 'Home':
-                return const HomeScreen();
-              case 'Appointment':
-                return const AppointmentScreen();
-              case 'History':
-                return HistoryScreen();
-              case 'Profile':
-                return const ProfileScreen();
-              default:
-                return Container();
-            }
-          },
-        ));
+        body: Obx(() => controller.getScreen()));
   }
 }

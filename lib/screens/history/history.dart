@@ -1,9 +1,10 @@
-import 'package:acs_1/models/dummy_data.dart';
 import 'package:acs_1/screens/history/history_detail.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../repository/models/dummy_data.dart';
 
 class HistoryScreen extends StatefulWidget {
   HistoryScreen({Key? key}) : super(key: key);
@@ -30,31 +31,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-              decoration: BoxDecoration(
-                color: ACSColors.white,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: ACSColors.primary, width: 1),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  items: status.map(buildMenuItem).toList(),
-                  icon: Image.asset('assets/icons/arrow-down.png'),
-                  elevation: 0,
-                  isExpanded: true,
-                  onChanged: (value) {
-                    setState(() {
-                      _status = value!;
-                    });
-                  },
-                  value: _status,
-                ),
-              ),
-            ),
+            const SizedBox(height: 30),
             SizedBox(
-              height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                 itemCount: listOrder.length,
                 shrinkWrap: true,
@@ -75,16 +53,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Image.asset(
-                              changeIconStatus(listOrder[index].status),
-                              height: 40,
-                              width: 40,
-                              color: changeColorStatus(listOrder[index].status),
-                            ),
-                          ),
-                          const SizedBox(width: 13),
                           Expanded(
                             flex: 2,
                             child: Column(
@@ -137,14 +105,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
       ),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        child: Text(
-          item,
-          style: ACSTyphoghraphy.heading1,
-        ),
-        value: item,
-      );
 
   String changeIconStatus(String status) {
     if (status.toLowerCase().contains('đã hủy')) {

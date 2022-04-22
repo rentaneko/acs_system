@@ -1,21 +1,14 @@
-import 'package:acs_1/models/dummy_data.dart';
+import 'package:acs_1/screens/appointment/appointment.controller.dart';
 import 'package:acs_1/screens/appointment/appointment_detail.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 
-class AppointmentScreen extends StatefulWidget {
+class AppointmentScreen extends GetWidget<AppointmentController> {
   const AppointmentScreen({Key? key}) : super(key: key);
 
-  @override
-  State<AppointmentScreen> createState() => _AppointmentScreenState();
-}
-
-class _AppointmentScreenState extends State<AppointmentScreen> {
-  final status = ['Tất cả', 'Đang chờ', 'Đã hủy', 'Hoàn tất'];
-
-  var _status = 'Tất cả';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,119 +23,107 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                decoration: BoxDecoration(
-                  color: ACSColors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: ACSColors.primary, width: 1),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    items: status.map(buildMenuItem).toList(),
-                    icon: Image.asset('assets/icons/arrow-down.png'),
-                    elevation: 0,
-                    isExpanded: true,
-                    onChanged: (value) {
-                      setState(() {
-                        _status = value!;
-                      });
-                    },
-                    value: _status,
-                  ),
-                ),
-              ),
+              const SizedBox(height: 30),
               SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
-                  itemCount: listAppointment.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.to(
-                          () => AppointmentDetail(
-                              appointment: listAppointment[index]),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            left: 16, right: 16, bottom: 20),
-                        padding: const EdgeInsets.all(16),
-                        height: 125,
-                        decoration: BoxDecoration(
-                          color: ACSColors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          border:
-                              Border.all(color: ACSColors.primary, width: 1),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset(
-                                changeIconStatus(listAppointment[index].status),
-                                height: 40,
-                                width: 40,
-                                color: changeColorStatus(
-                                    listAppointment[index].status),
+                child: Obx(
+                  () => ListView.builder(
+                    itemCount: controller.listAppointment.value.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          controller.appointment.value =
+                              controller.listAppointment[index];
+                          Get.to(
+                            () => const AppointmentDetail(),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: 16, right: 16, bottom: 20),
+                          padding: const EdgeInsets.all(16),
+                          height: 130,
+                          decoration: BoxDecoration(
+                            color: ACSColors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border:
+                                Border.all(color: ACSColors.primary, width: 1),
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Text('Dịch vụ',
+                                        style:
+                                            ACSTyphoghraphy.appointmentTitle),
+                                    SizedBox(height: 8),
+                                    Text('Trạng thái',
+                                        style:
+                                            ACSTyphoghraphy.appointmentTitle),
+                                    SizedBox(height: 8),
+                                    Text('Thời gian',
+                                        style:
+                                            ACSTyphoghraphy.appointmentTitle),
+                                    SizedBox(height: 8),
+                                    Text('Ngày',
+                                        style:
+                                            ACSTyphoghraphy.appointmentTitle),
+                                  ],
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 13),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: const [
-                                  Text('Dịch vụ',
-                                      style: ACSTyphoghraphy.appointmentTitle),
-                                  Text('Trạng thái',
-                                      style: ACSTyphoghraphy.appointmentTitle),
-                                  Text('Thời gian',
-                                      style: ACSTyphoghraphy.appointmentTitle),
-                                  Text('Ngày',
-                                      style: ACSTyphoghraphy.appointmentTitle),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    listAppointment[index].serviceType,
-                                    style: ACSTyphoghraphy.appointmentDetail,
-                                  ),
-                                  Text(
-                                    listAppointment[index].status,
-                                    style: ACSTyphoghraphy.appointmentDetail
-                                        .copyWith(
-                                      color: changeColorStatus(
-                                          listAppointment[index].status),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Obx(
+                                      () => Text(
+                                        controller.listAppointment[index]
+                                                .description ??
+                                            '',
+                                        style:
+                                            ACSTyphoghraphy.appointmentDetail,
+                                      ),
                                     ),
-                                  ),
-                                  Text(listAppointment[index].time,
-                                      style: ACSTyphoghraphy.appointmentDetail),
-                                  Text(listAppointment[index].date,
-                                      style: ACSTyphoghraphy.appointmentDetail),
-                                ],
+                                    const SizedBox(height: 8),
+                                    Obx(() => changeTextStatus(controller
+                                        .listAppointment[index].status)),
+                                    const SizedBox(height: 8),
+                                    Obx(
+                                      () => Text(
+                                          controller.listAppointment[index]
+                                                  .time ??
+                                              '',
+                                          style: ACSTyphoghraphy
+                                              .appointmentDetail),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Obx(
+                                      () => Text(
+                                          Jiffy(controller
+                                                      .listAppointment[index]
+                                                      .date)
+                                                  .format('dd-MM-yyyy') ??
+                                              '',
+                                          style: ACSTyphoghraphy
+                                              .appointmentDetail),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -160,21 +141,35 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         value: item,
       );
 
-  String changeIconStatus(String status) {
-    if (status.toLowerCase().contains('đã hủy')) {
+  String changeIconStatus(int? status) {
+    if (status == 1) {
       return 'assets/icons/error.png';
-    } else if (status.toLowerCase().contains('hoàn tất')) {
+    } else if (status == 2) {
       return 'assets/icons/check.png';
     }
     return 'assets/icons/waiting.png';
   }
 
-  Color changeColorStatus(String status) {
-    if (status.toLowerCase().contains('đã hủy')) {
-      return Colors.red;
-    } else if (status.toLowerCase().contains('hoàn tất')) {
-      return Colors.green;
+  Text changeTextStatus(int? status) {
+    if (status == 1) {
+      return Text(
+        'Đã hủy',
+        style: ACSTyphoghraphy.appointmentDetail.copyWith(color: Colors.red),
+      );
+    } else if (status == 2) {
+      return Text(
+        'Đã nhận',
+        style: ACSTyphoghraphy.appointmentDetail.copyWith(color: Colors.orange),
+      );
+    } else if (status == 3) {
+      return Text(
+        'Đang chờ',
+        style: ACSTyphoghraphy.appointmentDetail.copyWith(color: Colors.blue),
+      );
     }
-    return Colors.blue;
+    return Text(
+      'Đã xong',
+      style: ACSTyphoghraphy.appointmentDetail.copyWith(color: Colors.green),
+    );
   }
 }
