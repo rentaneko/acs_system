@@ -1,4 +1,6 @@
 import 'package:acs_1/screens/appointment/appointment.controller.dart';
+import 'package:acs_1/screens/history/history_detail.dart';
+import 'package:acs_1/screens/order/order_detail.dart';
 import 'package:acs_1/styles/acs_colors.dart';
 import 'package:acs_1/styles/acs_typhoghraphy.dart';
 import 'package:flutter/material.dart';
@@ -198,7 +200,9 @@ class AppointmentDetail extends GetWidget<AppointmentController> {
   ElevatedButton changeButtonByStatus(int? status) {
     if (status == 2) {
       return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => const OrderDetailScreen());
+        },
         child: const Text(
           'Xem hóa đơn',
           style: ACSTyphoghraphy.buttonTitle,
